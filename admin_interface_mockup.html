@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Omimi Swords - Admin Upload Experience Mockup</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 20px; background: #f8f9fa; }
+        .admin-container { max-width: 1200px; margin: 0 auto; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .admin-header { background: #417690; color: white; padding: 15px 20px; border-radius: 8px 8px 0 0; }
+        .admin-content { padding: 20px; }
+        .fieldset { border: 1px solid #ddd; border-radius: 6px; margin: 20px 0; padding: 20px; }
+        .fieldset legend { font-weight: bold; color: #333; padding: 0 10px; }
+        .form-row { margin-bottom: 15px; display: flex; align-items: flex-start; gap: 20px; }
+        .form-label { min-width: 120px; font-weight: 500; color: #555; }
+        .form-field { flex: 1; }
+        .thumbnail { width: 80px; height: 80px; object-fit: cover; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .no-image { width: 80px; height: 80px; background: #f0f0f0; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #666; font-size: 12px; }
+        .image-info { font-size: 12px; color: #666; margin-top: 5px; }
+        .s3-link { color: #0066cc; text-decoration: none; }
+        .upload-area { border: 2px dashed #ddd; border-radius: 6px; padding: 20px; text-align: center; background: #fafafa; }
+        .upload-area:hover { border-color: #0066cc; background: #f0f8ff; }
+        .btn { background: #0066cc; color: white; padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; }
+        .btn:hover { background: #0052a3; }
+        .list-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .list-table th, .list-table td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; }
+        .list-table th { background: #f8f9fa; font-weight: 600; }
+        .list-table tr:hover { background: #f8f9fa; }
+        .status-indicator { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 8px; }
+        .status-uploaded { background: #28a745; }
+        .status-pending { background: #ffc107; }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1>🗡️ Omimi Swords Admin - Add Sword Image</h1>
+            <p>Images automatically uploaded to S3 Gallery Bucket with optimization</p>
+        </div>
+        
+        <div class="admin-content">
+            <!-- Add/Edit Form -->
+            <fieldset class="fieldset">
+                <legend>Sword Information</legend>
+                
+                <div class="form-row">
+                    <label class="form-label">Item Number:</label>
+                    <div class="form-field">
+                        <input type="number" value="042" style="padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <label class="form-label">Description:</label>
+                    <div class="form-field">
+                        <textarea style="width: 100%; height: 80px; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">Handforged katana with folded steel blade, traditional hamon line, and custom oak tsuka wrap. Length: 28 inches.</textarea>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="fieldset">
+                <legend>Image Upload</legend>
+                <p style="color: #666; margin-bottom: 15px; font-size: 14px;">
+                    Images are automatically uploaded to S3 and optimized. Maximum size: 10MB
+                </p>
+                
+                <div class="form-row">
+                    <label class="form-label">Current Image:</label>
+                    <div class="form-field">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjRjBGMEYwIiByeD0iOCIvPgo8cGF0aCBkPSJNMjQgMzJIMTZWMjRIOFYxNkgyNFYzMloiIGZpbGw9IiM5OTk5OTkiLz4KPHBhdGggZD0iTTQwIDQ4SDMyVjQwSDI0VjMySDQwVjQ4WiIgZmlsbD0iIzY2NjY2NiIvPgo8cGF0aCBkPSJNNTYgNjRINDhWNTZINDBWNDhINTZWNjRaIiBmaWxsPSIjMzMzMzMzIi8+CjwvZz4KPC9zdmc+" class="thumbnail" alt="Sword preview">
+                        <div class="image-info">
+                            <strong>Size:</strong> 1200x800<br>
+                            <strong>File:</strong> 234.5 KB<br>
+                            <strong>S3 Path:</strong> swords/042/katana_042_main.jpg<br>
+                            <a href="#" class="s3-link">View Full Size →</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <label class="form-label">Upload New:</label>
+                    <div class="form-field">
+                        <div class="upload-area">
+                            <div>📸 Drop image here or click to browse</div>
+                            <input type="file" accept="image/*" style="margin-top: 10px;">
+                            <div style="font-size: 12px; color: #666; margin-top: 5px;">
+                                Supports: JPG, PNG, WebP • Auto-resize to 1200px max • S3 upload with CDN
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <div style="padding: 20px 0; border-top: 1px solid #eee; margin-top: 20px;">
+                <button class="btn">💾 Save Sword</button>
+                <button class="btn" style="background: #6c757d; margin-left: 10px;">↩️ Back to List</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- List View Mockup -->
+    <div class="admin-container" style="margin-top: 30px;">
+        <div class="admin-header">
+            <h2>🗡️ Sword Gallery - Admin List View</h2>
+            <p>All images stored in S3: omimi-gallery-images/swords/</p>
+        </div>
+        
+        <div class="admin-content">
+            <table class="list-table">
+                <thead>
+                    <tr>
+                        <th>Item #</th>
+                        <th>Preview</th>
+                        <th>Description</th>
+                        <th>S3 Status</th>
+                        <th>Created</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>042</strong></td>
+                        <td>
+                            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjRjBGMEYwIiByeD0iNCIvPgo8cGF0aCBkPSJNMTIgMTZIOFYxMkg0VjhIMTJWMTZaIiBmaWxsPSIjOTk5OTk5Ii8+CjxwYXRoIGQ9Ik0yMCAyNEgxNlYyMEgxMlYxNkgyMFYyNFoiIGZpbGw9IiM2NjY2NjYiLz4KPHN2Zz4K" class="thumbnail" style="width: 40px; height: 40px;" alt="Katana preview">
+                        </td>
+                        <td>Handforged katana with folded steel...</td>
+                        <td><span class="status-indicator status-uploaded"></span>Uploaded</td>
+                        <td>Dec 15, 2024</td>
+                        <td><a href="#" class="s3-link">Edit</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>041</strong></td>
+                        <td>
+                            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjRjBGMEYwIiByeD0iNCIvPgo8cGF0aCBkPSJNMTIgMTZIOFYxMkg0VjhIMTJWMTZaIiBmaWxsPSIjOTk5OTk5Ii8+CjxwYXRoIGQ9Ik0yMCAyNEgxNlYyMEgxMlYxNkgyMFYyNFoiIGZpbGw9IiM2NjY2NjYiLz4KPHN2Zz4K" class="thumbnail" style="width: 40px; height: 40px;" alt="Wakizashi preview">
+                        </td>
+                        <td>Traditional wakizashi with ray skin...</td>
+                        <td><span class="status-indicator status-uploaded"></span>Uploaded</td>
+                        <td>Dec 14, 2024</td>
+                        <td><a href="#" class="s3-link">Edit</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>040</strong></td>
+                        <td>
+                            <div class="no-image">Uploading...</div>
+                        </td>
+                        <td>Custom tanto blade in progress...</td>
+                        <td><span class="status-indicator status-pending"></span>Uploading</td>
+                        <td>Dec 13, 2024</td>
+                        <td><a href="#" class="s3-link">Edit</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Blog Admin Mockup -->
+    <div class="admin-container" style="margin-top: 30px;">
+        <div class="admin-header">
+            <h2>📝 Blog Posts - Admin Interface</h2>
+            <p>Images stored in S3: omimi-blog-images/2024/12/</p>
+        </div>
+        
+        <div class="admin-content">
+            <fieldset class="fieldset">
+                <legend>Blog Post Content</legend>
+                
+                <div class="form-row">
+                    <label class="form-label">Title:</label>
+                    <div class="form-field">
+                        <input type="text" value="New Folding Technique for Damascus Steel" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <label class="form-label">Featured Image:</label>
+                    <div class="form-field">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjRjBGMEYwIiByeD0iOCIvPgo8cGF0aCBkPSJNMzAgNDBIMjBWMzBIMTBWMjBIMzBWNDBaIiBmaWxsPSIjRkY2NjAwIi8+CjxwYXRoIGQ9Ik01MCA2MEg0MFY1MEgzMFY0MEg1MFY2MFoiIGZpbGw9IiNGRjMzMDAiLz4KPHBhdGggZD0iTTcwIDgwSDYwVjcwSDUwVjYwSDcwVjgwWiIgZmlsbD0iI0ZGMDAwMCIvPgo8L3N2Zz4K" class="thumbnail" style="width: 100px; height: 100px;" alt="Forge fire">
+                        <div class="image-info">
+                            <strong>S3 Path:</strong> 2024/12/forge_fire_technique.jpg<br>
+                            <a href="#" class="s3-link">View Full Size →</a>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="fieldset">
+                <legend>Additional Images (Gallery)</legend>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                    <div style="text-align: center;">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjRjBGMEYwIiByeD0iNiIvPgo8cGF0aCBkPSJNMTggMjRIMTJWMThIOFYxMkgxOFYyNFoiIGZpbGw9IiM2NjY2NjYiLz4KPC9zdmc+" style="width: 60px; height: 60px; border-radius: 6px;" alt="Process step 1">
+                        <div style="font-size: 11px; margin-top: 4px;">step1.jpg</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjRjBGMEYwIiByeD0iNiIvPgo8cGF0aCBkPSJNMTggMjRIMTJWMThIOFYxMkgxOFYyNFoiIGZpbGw9IiM2NjY2NjYiLz4KPC9zdmc+" style="width: 60px; height: 60px; border-radius: 6px;" alt="Process step 2">
+                        <div style="font-size: 11px; margin-top: 4px;">step2.jpg</div>
+                    </div>
+                    <div style="text-align: center; opacity: 0.5;">
+                        <div style="width: 60px; height: 60px; border: 2px dashed #ccc; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 20px;">+</div>
+                        <div style="font-size: 11px; margin-top: 4px;">Add Image</div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</body>
+</html>
