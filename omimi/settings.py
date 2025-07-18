@@ -151,9 +151,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
+# MEDIA_URL will be automatically set by S3 storage backend when using signed URLs
+# MEDIA_URL = '/media/'  # Commented out - S3 storage handles this
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')  # Not needed for S3 storage
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),
 #'/var/www/static/',
