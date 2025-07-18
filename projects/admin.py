@@ -34,13 +34,16 @@ class Sword_imgAdmin(admin.ModelAdmin):
 
 @admin.register(Sword_sales)
 class Sword_salesAdmin(admin.ModelAdmin):
-    # def thumbnail(self, object):
-    #     return format_html('<img src="{}" width="40" />'.format(object.image.url))
+    def thumbnail(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" width="50" height="50" style="object-fit: cover; border-radius: 4px;" />', obj.image.url)
+        return "No Image"
+    thumbnail.short_description = 'Preview'
 
-    # list_display = ['item_number', 'thumbnail']
-    list_display = ['item_number']
-    search_fields = ['item_number']
+    list_display = ['item_number', 'thumbnail', 'price', 'description']
+    search_fields = ['item_number', 'description', 'price']
     list_filter = ['item_number']
+    readonly_fields = ['thumbnail']
 
 @admin.register(Hotel)
 class HotelAdmin(admin.ModelAdmin):
@@ -55,7 +58,14 @@ class BlogImagesInline(admin.TabularInline):
 
 @admin.register(BlogImages)
 class BlogImagesAdmin(admin.ModelAdmin):
-    list_display = ['image']
+    def thumbnail(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" width="80" height="60" style="object-fit: cover; border-radius: 4px;" />', obj.image.url)
+        return "No Image"
+    thumbnail.short_description = 'Preview'
+    
+    list_display = ['thumbnail', 'image']
+    readonly_fields = ['thumbnail']
 
 
 @admin.register(Blog)
