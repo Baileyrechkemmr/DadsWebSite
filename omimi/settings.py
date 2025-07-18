@@ -20,7 +20,8 @@ import environ
 
 env = environ.Env()
 
-environ.Env.read_env()
+# Read the .env file from the BASE_DIR
+environ.Env.read_env(env_file=os.path.join(BASE_DIR, '.env'))
 
 
 
@@ -50,6 +51,7 @@ INSTALLED_APPS = [
     'projects.apps.ProjectsConfig',
     'django_ckeditor_5',
     'ckeditor',
+    'storages',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -82,6 +84,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -147,18 +150,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-# STATIC_URL = '/static/'
-# MEDIA_URL = '/media/'
-
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),
-# #'/var/www/static/',
-# ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),
+#'/var/www/static/',
+]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 customColorPalette = [
     {
@@ -259,3 +259,25 @@ CKEDITOR_5_CONFIGS = {
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# AWS S3 Settings - ENABLED FOR S3 INTEGRATION
+AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_REGION_NAME = env('AWS_S3_REGION', default='us-east-1')
+AWS_DEFAULT_ACL = None  # Modern S3 buckets don't use ACLs
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+
+# S3 Media Settings - ENABLED with signed URLs for private bucket
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_QUERYSTRING_AUTH = True  # Use signed URLs for private bucket
+AWS_QUERYSTRING_EXPIRE = 3600  # URLs expire after 1 hour
+# AWS_S3_SIGNATURE_VERSION = 's3v4'  # Disabled - use default signature v2
+
+# For private buckets, don't set MEDIA_URL - let Django generate signed URLs
+# MEDIA_URL will be generated automatically by the storage backend
+
+# Keep static files local for now (we'll test media first)
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'

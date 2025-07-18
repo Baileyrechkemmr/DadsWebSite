@@ -300,9 +300,9 @@
             <div class="card_container">
                 {% for sword_img in swords.all %}
                 <div class="card" style="width: 18rem;">
-                    <img src="{{ sword_img.image }}" class="card-img-top" alt="{{ swords.image }}">
+                    <img src="{{ sword_img.image.url }}" class="card-img-top" alt="{{ sword_img.image }}">
                     <div class="card-body">
-                        <h5 class="card-title">{{ sword_img.item_number }}</h5>
+                        <h5 class="card-title">Sword {{ sword_img.item_number }}</h5>
                         <button class="button">
                             <a class="button_color" href="{% url 'details_s' sword_img.id %}" class="btn btn-primary">Learn more</a>
                         </button>

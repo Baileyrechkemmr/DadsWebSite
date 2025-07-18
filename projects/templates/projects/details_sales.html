@@ -161,7 +161,7 @@
             <div id="details" class="row py-lg-5">
                 <div class="col-lg-6 col-md-8 mx-auto">
                     <!-- profile image static name is the same as pic in static folder created from command python3 manage.py collectstatic -->
-                    <img class="mb-3" src='{{ sword_sales_detail.image }}' alt="{{sword.image}}"
+                    <img class="mb-3" src='{{ sword_sales_detail.image.url }}' alt="{{sword.image}}"
                         style="width: 420px; height: 490px">
                     <h1 class="fw-light">{{ sword_sales_detail.item_number }}</h1>
                     <p id="text" class="lead">{{ sword_sales_detail.description}}</p>
