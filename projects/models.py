@@ -41,7 +41,7 @@ class Hotel(models.Model):
     address = models.CharField(max_length=100)
     description = models.TextField(default="null")
     distance = models.CharField(max_length=100)
-    phone = models.CharField(max_length=100, default=515-555-5555)
+    phone = models.CharField(max_length=100, default="515-555-5555")
 
     def __str__(self):
         return self.hotel_name
