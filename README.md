@@ -104,11 +104,34 @@ Environment: django-environ for secure config
 
 ## 🚀 Installation & Setup Guide
 
-### **Prerequisites**
+### **Prerequisites & Python 3 Installation**
+
+#### **Install Python 3 and pip3**
+```bash
+# macOS (using Homebrew)
+brew install python3
+# Verify: python3 --version should show 3.8+
+
+# Ubuntu/Debian
+sudo apt update
+sudo apt install python3 python3-pip python3-venv
+# Verify: python3 --version && pip3 --version
+
+# CentOS/RHEL/Fedora
+sudo dnf install python3 python3-pip python3-venv
+# or: sudo yum install python3 python3-pip python3-venv
+
+# Windows
+# Download Python 3.8+ from https://python.org/downloads/
+# Ensure "Add Python to PATH" is checked during installation
+# Verify: python3 --version && pip3 --version
+```
+
 Before starting, ensure you have:
-- **Python 3.8 or higher** (tested up to 3.11)
+- **Python 3.8 or higher** (tested up to 3.11) - **INSTALLED ABOVE**
+- **pip3** - Python 3 package manager - **INSTALLED ABOVE**
 - **Git** for version control
-- **Virtual Environment** capability (venv/virtualenv)
+- **Virtual Environment** capability (python3 -m venv)
 - **AWS Account** for S3 access (credentials required)
 - **Gmail Account** with app password for email features
 
@@ -123,9 +146,9 @@ ls -la
 # Should show: manage.py, requirements.txt, .env.example, README.md, etc.
 ```
 
-### **Step 2: Python Environment**
+### **Step 2: Python 3 Environment Setup**
 ```bash
-# Create isolated Python environment
+# Create isolated Python 3 environment
 python3 -m venv venv
 
 # Activate environment (macOS/Linux)
@@ -134,14 +157,14 @@ source venv/bin/activate
 # Activate environment (Windows)
 venv\Scripts\activate
 
-# Upgrade pip to latest version
-pip install --upgrade pip
+# Upgrade pip3 to latest version
+pip3 install --upgrade pip
 
-# Install all project dependencies
-pip install -r requirements.txt
+# Install all project dependencies with pip3
+pip3 install -r requirements.txt
 
-# Verify installation
-python -c "import django; print(f'Django {django.get_version()} installed successfully')"
+# Verify installation with python3
+python3 -c "import django; print(f'Django {django.get_version()} installed successfully')"
 ```
 
 ### **Step 3: Environment Configuration**
@@ -178,22 +201,22 @@ EMAIL_HOST_PASSWORD=your-gmail-app-password
 ### **Step 4: Database Setup**
 ```bash
 # Apply all database migrations
-python manage.py makemigrations
-python manage.py migrate
+python3 manage.py makemigrations
+python3 manage.py migrate
 
 # Verify database setup
-python manage.py check
+python3 manage.py check
 # Should output: System check identified no issues (0 silenced).
 
 # Create administrative user
-python manage.py createsuperuser
+python3 manage.py createsuperuser
 # Follow prompts to create admin account
 ```
 
 ### **Step 5: Test Installation**
 ```bash
 # Start development server
-python manage.py runserver
+python3 manage.py runserver
 
 # Open browser to: http://localhost:8000
 # Admin access: http://localhost:8000/admin
@@ -253,13 +276,13 @@ AWS_QUERYSTRING_EXPIRE = 3600   # URLs expire after 1 hour
 ### **Testing S3 Integration**
 ```bash
 # Test S3 connection and functionality
-python test_s3_integration.py
+python3 test_s3_integration.py
 
 # Check specific uploaded files
-python check_s3_files.py
+python3 check_s3_files.py
 
 # Verify image access
-python manage.py shell
+python3 manage.py shell
 >>> from django.core.files.storage import default_storage
 >>> print(default_storage.url('images/sword_one.webp'))
 ```
@@ -583,8 +606,8 @@ Specialized for bespoke sword orders:
 # Start development session
 source venv/bin/activate
 git pull origin main
-python manage.py migrate  # Apply any new migrations
-python manage.py runserver
+python3 manage.py migrate  # Apply any new migrations
+python3 manage.py runserver
 
 # Make changes...
 # Test changes thoroughly
@@ -596,7 +619,7 @@ git push origin main
 ```
 
 ### **Code Quality Standards**
-- **PEP 8 Compliance**: Python code formatting standards
+- **PEP 8 Compliance**: Python 3 code formatting standards
 - **Descriptive Commits**: Clear, actionable commit messages
 - **Environment Separation**: Never commit sensitive credentials
 - **Documentation**: Update README for significant changes
@@ -605,24 +628,24 @@ git push origin main
 ### **Database Management**
 ```bash
 # Create new migrations after model changes
-python manage.py makemigrations
+python3 manage.py makemigrations
 
 # Apply migrations
-python manage.py migrate
+python3 manage.py migrate
 
 # Reset database (CAREFUL - loses all data)
 rm db.sqlite3
-python manage.py migrate
-python manage.py createsuperuser
+python3 manage.py migrate
+python3 manage.py createsuperuser
 ```
 
 ### **Backup Procedures**
 ```bash
 # Backup database
-python manage.py dumpdata > backup_$(date +%Y%m%d).json
+python3 manage.py dumpdata > backup_$(date +%Y%m%d).json
 
 # Restore database
-python manage.py loaddata backup_20250118.json
+python3 manage.py loaddata backup_20250118.json
 
 # S3 images are automatically backed up by AWS
 ```
@@ -637,13 +660,13 @@ python manage.py loaddata backup_20250118.json
 **Diagnosis**:
 ```bash
 # Test S3 connection
-python test_s3_integration.py
+python3 test_s3_integration.py
 
 # Check specific files
-python check_s3_files.py
+python3 check_s3_files.py
 
 # Verify credentials
-python manage.py shell
+python3 manage.py shell
 >>> from django.conf import settings
 >>> print(f"Bucket: {settings.AWS_STORAGE_BUCKET_NAME}")
 >>> print(f"Region: {settings.AWS_S3_REGION_NAME}")
@@ -661,7 +684,7 @@ python manage.py shell
 **Diagnosis**:
 ```python
 # Test email configuration
-python manage.py shell
+python3 manage.py shell
 >>> from django.core.mail import send_mail
 >>> send_mail('Test', 'Test message', 'from@email.com', ['to@email.com'])
 >>> # Should return 1 if successful
@@ -679,10 +702,10 @@ python manage.py shell
 **Solutions**:
 ```bash
 # Create/reset superuser
-python manage.py createsuperuser
+python3 manage.py createsuperuser
 
 # Check admin registration
-python manage.py shell
+python3 manage.py shell
 >>> from django.contrib import admin
 >>> print(list(admin.site._registry.keys()))
 ```
@@ -693,15 +716,15 @@ python manage.py shell
 **Solutions**:
 ```bash
 # Check migration status
-python manage.py showmigrations
+python3 manage.py showmigrations
 
 # Rollback to specific migration
-python manage.py migrate projects 0027
+python3 manage.py migrate projects 0027
 
 # Reset migrations (CAREFUL - data loss)
 rm projects/migrations/00*.py
-python manage.py makemigrations projects
-python manage.py migrate
+python3 manage.py makemigrations projects
+python3 manage.py migrate
 ```
 
 ### **⚙️ Environment Variable Issues**
@@ -714,7 +737,7 @@ ls -la .env
 cat .env
 
 # Test environment loading
-python manage.py shell
+python3 manage.py shell
 >>> import os
 >>> print(os.environ.get('AWS_ACCESS_KEY_ID'))
 >>> print(os.environ.get('SECRET_KEY'))
@@ -774,9 +797,9 @@ heroku config:set EMAIL_HOST_PASSWORD=your-app-password
 # Deploy application
 git push heroku main
 
-# Initialize database
-heroku run python manage.py migrate
-heroku run python manage.py createsuperuser
+# Initialize database with python3
+heroku run python3 manage.py migrate
+heroku run python3 manage.py createsuperuser
 
 # Open application
 heroku open
@@ -793,8 +816,8 @@ git clone https://github.com/Baileyrechkemmr/DadsWebSite.git
 cd DadsWebSite
 python3 -m venv venv
 source venv/bin/activate
-pip install -r requirements.txt
-pip install gunicorn psycopg2-binary
+pip3 install -r requirements.txt
+pip3 install gunicorn psycopg2-binary
 
 # Configure environment
 cp .env.example .env
@@ -802,9 +825,9 @@ cp .env.example .env
 
 # Database setup
 sudo -u postgres createdb swordwebsite
-python manage.py migrate
-python manage.py collectstatic
-python manage.py createsuperuser
+python3 manage.py migrate
+python3 manage.py collectstatic
+python3 manage.py createsuperuser
 
 # Gunicorn setup
 gunicorn --bind 0.0.0.0:8000 omimi.wsgi:application
@@ -872,7 +895,7 @@ LOGGING = {
 ```bash
 # Regular health monitoring
 curl -I https://yourdomain.com/  # HTTP status check
-python manage.py check --deploy  # Django security check
+python3 manage.py check --deploy  # Django security check
 ```
 
 ---
