@@ -98,24 +98,31 @@ WSGI_APPLICATION = 'omimi.wsgi.application'
 
 import dj_database_url
 
-# Railway deployment database configuration
-if env('DATABASE_URL', default=None):
+# Database configuration - Railway automatically provides DATABASE_URL
+DATABASE_URL = env('DATABASE_URL', default=None)
+
+if DATABASE_URL:
     # Production database (Railway PostgreSQL)
+    print(f"Using PostgreSQL database from DATABASE_URL")
     DATABASES = {
         'default': dj_database_url.parse(
-            env('DATABASE_URL'),
+            DATABASE_URL,
             conn_max_age=600,
             conn_health_checks=True,
         )
     }
 else:
-    # Fallback for local development
+    # Local development fallback
+    print("Using SQLite database for local development")
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+
+# Print database engine being used for debugging
+print(f"Database engine: {DATABASES['default']['ENGINE']}")
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
