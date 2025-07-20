@@ -96,23 +96,26 @@ WSGI_APPLICATION = 'omimi.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# local host
+import dj_database_url
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+# Railway deployment database configuration
+if env('DATABASE_URL', default=None):
+    # Production database (Railway PostgreSQL)
+    DATABASES = {
+        'default': dj_database_url.parse(
+            env('DATABASE_URL'),
+            conn_max_age=600,
+            conn_health_checks=True,
+        )
     }
-}
-
-#  live render
-
-# import dj_database_url 
-
-# DATABASES = {
-#     'default': dj_database_url.parse(env('DATABASE_URL'))
-
-# }
+else:
+    # Fallback for local development
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
