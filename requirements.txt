@@ -1,0 +1,10 @@
+Django>=3.2,<4.0
+django-environ
+psycopg2-binary
+django-ckeditor
+django-storages
+boto3
+dj-database-url
+supabase
+Pillow
+gunicorn

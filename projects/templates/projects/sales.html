@@ -1,0 +1,475 @@
+<!doctype html>
+{% load static %}
+<html lang="en" data-bs-theme="auto">
+
+<head>
+    <script src="/docs/5.3/assets/js/color-modes.js"></script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.111.3">
+    <title>Omimi sales</title>
+    <!-- needed for boot strap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (max-width: 767px) {
+            /* CSS for screens with a width less than 768px goes here */
+            .container_marketing {
+                display: none; /* Hide the marketing content */
+            }
+            
+
+            /* Show the "Coming Soon" content */
+            .coming-soon {
+                text-align: center;
+                margin: 100px auto;
+                max-width: 600px;
+                padding: 20px;
+                background-color: #fff;
+                border-radius: 5px;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+                display: block;
+            }
+
+            .coming-soon h1 {
+                font-size: 36px;
+                color: #333;
+            }
+
+            .coming-soon p {
+                font-size: 18px;
+                color: #666;
+            }
+        }
+
+        .b-example-divider {
+            width: 100%;
+            height: 3rem;
+            background-color: rgba(0, 0, 0, .1);
+            border: solid rgba(0, 0, 0, .15);
+            border-width: 1px 0;
+            box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+        }
+
+        .b-example-vr {
+            flex-shrink: 0;
+            width: 1.5rem;
+            height: 100vh;
+        }
+
+        .bi {
+            vertical-align: -.125em;
+            fill: currentColor;
+        }
+
+        .nav-scroller {
+            position: relative;
+            z-index: 2;
+            height: 2.75rem;
+            overflow-y: hidden;
+        }
+
+        .nav-scroller .nav {
+            display: flex;
+            flex-wrap: nowrap;
+            padding-bottom: 1rem;
+            margin-top: -1px;
+            overflow-x: auto;
+            text-align: center;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .btn-bd-primary {
+            --bd-violet-bg: #712cf9;
+            --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+            --bs-btn-font-weight: 600;
+            --bs-btn-color: var(--bs-white);
+            --bs-btn-bg: var(--bd-violet-bg);
+            --bs-btn-border-color: var(--bd-violet-bg);
+            --bs-btn-hover-color: var(--bs-white);
+            --bs-btn-hover-bg: #6528e0;
+            --bs-btn-hover-border-color: #6528e0;
+            --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+            --bs-btn-active-color: var(--bs-btn-hover-color);
+            --bs-btn-active-bg: #5a23c8;
+            --bs-btn-active-border-color: #5a23c8;
+        }
+
+        .bd-mode-toggle {
+            z-index: 1500;
+        }
+
+        .container_marketing{
+            display: flex;
+        }
+
+        .card_container {
+            margin-left: 3%;
+            display: flex;
+            flex-direction: row;
+            gap: 7px;
+            flex-wrap: wrap;
+            height: 75vh;
+            width: 70vw;
+            overflow-y: scroll;
+            scrollbar-width: thin; /* Set the width of the scrollbar */
+            scrollbar-color: transparent transparent; /* Set the color of the scrollbar */
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* Internet Explorer and Edge */
+            /* border: #712cf9 solid 4px; */
+        }
+        .card_container::-webkit-scrollbar {
+            width: 6px; /* Set the width of the scrollbar */
+        }
+
+        .card_container::-webkit-scrollbar-thumb {
+        background-color: transparent; /* Set the color of the scrollbar thumb */
+        }
+
+        .card_container::-webkit-scrollbar-track {
+        background-color: transparent; /* Set the color of the scrollbar track */
+        }
+
+        .card-img-top {
+            height: 300px;
+
+        }
+
+        .sales_form{
+            border-radius: 10px;
+            box-shadow: rgb(0, 0, 0) 5px 15px 5px;
+            background-color: rgba(128, 128, 128, 0.863);
+            margin-bottom: 2%;
+            padding-right: 1.5%;
+            padding-left: 1.5%;
+            padding-bottom: 1.5%;
+            margin-right: 3%;
+        }
+
+        body {
+            background-image: url("{% static 'howard1.jpeg' %}");
+            background-size: 75%;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            background-color: rgb(129, 38, 38);
+            backdrop-filter: blur(5px);
+        }
+
+        /* button */button {
+            width: 250px;
+            padding: 10px;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            position: relative;
+            z-index: 0;
+            border-radius: 12px;
+            background-color: black;
+            color: white;
+            position: sticky;
+        }
+        
+        
+        button::after {
+            content: "";
+            z-index: -1;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: linear-gradient( to bottom right, rgb(237, 6, 6), yellow);
+            left: 0;
+            top:0;
+            border-radius: 10px;
+        }
+
+        .button_color{
+            color: white;
+        }
+
+        button::before {
+            content: "";
+            background: linear-gradient(
+                90deg,
+                #ff0000, #ff7300,yellow, #ff7300, #ff0000, #ff7300, yellow
+            );
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            background-size: 600%;
+            z-index: -1;
+            width: calc(100% + 4px);
+            height: calc(100% + 4px);
+            filter:blur(8px);
+            animation: glowing 3.5s linear infinite;
+            transition: opacity 0.3s ease-in-out;
+            border-radius: 10px;
+            opacity: 0;
+        }
+        @keyframes glowing {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .container_footer {
+            background-color: grey;
+            /* Set a fixed height for the footer to keep it at the bottom */
+            height: 40px; /* You can adjust the height as per your requirement */
+        }
+        .card {
+            background-color: rgba(128, 128, 128, 0.895)
+        }
+        
+
+        /* end button */
+        .coming-soon{
+            display: none;
+        }
+        .pay_pal_info {
+            border-radius: 10px;
+            box-shadow: rgb(0, 0, 0) 5px 15px 5px;
+            background-color: rgba(128, 128, 128, 0.863);
+            width: 70%;
+            margin-left: 4%;
+            margin-bottom: 3%;
+        }
+    </style>
+
+
+    <!-- Custom styles for this template -->
+    
+</head>
+
+<body>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="check2" viewBox="0 0 16 16">
+            <path
+                d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+        </symbol>
+        <symbol id="circle-half" viewBox="0 0 16 16">
+            <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" />
+        </symbol>
+        <symbol id="moon-stars-fill" viewBox="0 0 16 16">
+            <path
+                d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z" />
+            <path
+                d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z" />
+        </symbol>
+        <symbol id="sun-fill" viewBox="0 0 16 16">
+            <path
+                d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z" />
+        </symbol>
+    </svg>
+
+
+
+
+    <header data-bs-theme="dark">
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'classes' %}">Classes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'blog' %}">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'about' %}">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'movie' %}">L6 bainite movie</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'gallery' %}">Gallery</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'order_form' %}">Order a sword
+                                from Omimi</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'sales' %}">Sales</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <svg class="bd-placeholder-img" width="100%" height="100%">
+                        <rect width="100%" height="100%" fill="var(--bs-secondary-color)" />
+                        <img src="{{ sword_img.image.url }}" width="100%" height="100%" />
+                    </svg>
+                    <div class="container">
+                        <div class="carousel-caption text-start">
+                            <h1>Example headline.</h1>
+                            <p>Some representative placeholder content for the first slide of the carousel.</p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <rect width="100%" height="100%" fill="var(--bs-secondary-color)" />
+                    </svg>
+                    <div class="container">
+                        <div class="carousel-caption">
+                            <h1>Another example headline.</h1>
+                            <p>Some representative placeholder content for the second slide of the carousel.</p>
+                            <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <rect width="100%" height="100%" fill="var(--bs-secondary-color)" />
+                    </svg>
+                    <div class="container">
+                        <div class="carousel-caption text-end">
+                            <h1>One more for good measure.</h1>
+                            <p>Some representative placeholder content for the third slide of this carousel.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div> -->
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+
+
+        <!-- Marketing messaging and featurettes
+  ================================================== -->
+        <!-- Wrap the rest of the page in another container to center all the content. -->
+
+        <div class="container_marketing">
+
+
+            <!-- START THE FEATURETTES -->
+            <div class="row">
+                <div class="card_container">
+                    {% for sword_sales in sword_sales.all %}
+                    <div class="card" style="width: 18rem;">
+                        <img src="{{ sword_sales.image.url }}" class="card-img-top" alt="{{ sword_sales.image }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ sword_sales.item_number }}</h5>
+                            <P class="card-price">${{ sword_sales.price }}</P>
+                            <button class="button">
+                                <a class="button_color" href="{% url 'details_sales' sword_sales.id %}" class="btn btn-primary">Learn more</a>
+                            </button>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="pay_pal_info">
+                    <p>To secure your order, send a PayPal payment to howard@mvforge.com and please include complete
+                        contact
+                        information, such as a mailing address, shipping address (if different), email contact, and a telephone number. Or
+                        we
+                        can make arrangements to accept a credit card in other ways. Contact us at howard@mvforge.com for more options.</p>
+                </div>
+            </div>
+            <!-- /END THE FEATURETTES -->
+            <div class="sales_form">
+                <form class="" method="POST" action="{% url 'sales' %}">
+                    {% csrf_token %}
+                    Item Number: <input type="number" name="item_number" required min="1">
+                    <br />
+                    <br />
+                    Email: <input type="email" name="email" placeholder="example@example.com" required>
+                    <br />
+                    <br />
+                    Name: <input type="text" name="name" placeholder="John Doe" required>
+                    <br />
+                    <br />
+                    Address 1: <input type="text" name="address_1" placeholder="P.Sherman 42 wallaby way" required>
+                    <br />
+                    <br />
+                    Address 2:<input type="text" name="address_2" placeholder=" aprt 42" required>
+                    <br />
+                    <br />
+                    City: <input type="text" name="city" placeholder="Sydney" required>
+                    <br />
+                    <br />
+                    State or Province: <input type="text" name="state_or_province" placeholder="Iowa" required>
+                    <br />
+                    <br />
+                    Zip Code: <input type="text" name="zip_code" placeholder="23456" required>
+                    <br />
+                    <br />
+                    Country: <input type="text" name="country" placeholder="Australia" required>
+                    <br />
+                    <br />
+                    Phone Number <input type="tel" name="phone_number" placeholder="515-555-5555" required>
+                    <br />
+                    <br />
+
+                    <button class="slaes_order_form_button" type="submit">submit</button>
+
+                </form>
+            </div>
+
+        </div><!-- /.container -->
+
+
+        <!-- FOOTER -->
+        <footer class="container_footer">
+            <p class="float-end"><a href="#">Back to top</a></p>
+            <p>&copy; Morgan Valley forge since 1988.</p>
+        </footer>
+        </main>
+    </main>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <div class="coming-soon">
+        <h1>Coming Soon</h1>
+        <p>Our website is currently under construction. Please check back later!</p>
+    </div>
+</body>
+
+</html>

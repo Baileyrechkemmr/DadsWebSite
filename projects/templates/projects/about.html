@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+
+<!-- loads in the static collected from command python3 manage.py collectstatic-->
+{% load static %}
+
+<head>
+    <script src="/docs/5.3/assets/js/color-modes.js"></script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.111.3">
+    <title>Omimi about</title>
+    <!-- needed for boot strap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none; 
+            user-select: none;
+        }
+            /* mobile */
+        @media (max-width: 767px) {
+            /* CSS for screens with a width less than 768px goes here */
+            .container_marketing {
+                display: none; /* Hide the marketing content */
+            }
+            
+
+            /* Show the "Coming Soon" content */
+            .coming-soon {
+                text-align: center;
+                margin: 100px auto;
+                max-width: 600px;
+                padding: 20px;
+                background-color: #fff;
+                border-radius: 5px;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+                display: block;
+            }
+
+            .coming-soon h1 {
+                font-size: 36px;
+                color: #333;
+            }
+
+            .coming-soon p {
+                font-size: 18px;
+                color: #666;
+            }
+        }
+
+        .b-example-divider {
+            width: 100%;
+            height: 3rem;
+            background-color: rgba(0, 0, 0, .1);
+            border: solid rgba(0, 0, 0, .15);
+            border-width: 1px 0;
+            box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+        }
+
+        .b-example-vr {
+            flex-shrink: 0;
+            width: 1.5rem;
+            height: 100vh;
+        }
+
+        .bi {
+            vertical-align: -.125em;
+            fill: currentColor;
+        }
+
+        .nav-scroller {
+            position: relative;
+            z-index: 2;
+            height: 2.75rem;
+            overflow-y: hidden;
+        }
+
+        .nav-scroller .nav {
+            display: flex;
+            flex-wrap: nowrap;
+            padding-bottom: 1rem;
+            margin-top: -1px;
+            overflow-x: auto;
+            text-align: center;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .btn-bd-primary {
+            --bd-violet-bg: #712cf9;
+            --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+            --bs-btn-font-weight: 600;
+            --bs-btn-color: var(--bs-white);
+            --bs-btn-bg: var(--bd-violet-bg);
+            --bs-btn-border-color: var(--bd-violet-bg);
+            --bs-btn-hover-color: var(--bs-white);
+            --bs-btn-hover-bg: #6528e0;
+            --bs-btn-hover-border-color: #6528e0;
+            --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+            --bs-btn-active-color: var(--bs-btn-hover-color);
+            --bs-btn-active-bg: #5a23c8;
+            --bs-btn-active-border-color: #5a23c8;
+        }
+
+        .bd-mode-toggle {
+            z-index: 1500;
+        }
+
+        body {
+            background-image: url("{% static 'howard1.jpeg' %}");
+            background-size: 75%;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            background-color: rgb(129, 38, 38);
+            backdrop-filter: blur(5px);
+        }
+
+        .about_info{
+
+            border-radius: 10px;
+            box-shadow: rgb(0, 0, 0) 5px 15px 5px;
+            background-color: rgba(73, 73, 73, 0.583);
+
+        }
+
+    
+
+        p, h4 {
+            color: rgb(242, 239, 234);
+        }
+        .about_pic {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 60px;
+            border-radius: 10px;
+        }
+        
+        #page-container {
+            position: relative;
+            min-height: 100vh;
+        }
+
+        #content-wrap {
+            padding-bottom: 2.5rem;    /* Footer height */
+        }
+
+
+        img {
+            border-radius: 10px;
+
+
+        }
+        
+        .image {
+            display: flex;
+            
+            padding: 1.5%;
+        }
+
+        #container_footer{
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 2.5rem;            /* Footer height */
+            background-color: grey;
+            /* Set a fixed height for the footer to keep it at the bottom */
+            height: 40px; /* You can adjust the height as per your requirement */
+        }
+        .coming-soon{
+            display: none;
+        }
+    </style>
+
+
+    <!-- Custom styles for this template -->
+    
+</head>
+
+<body>
+    <div id="page-container">
+        <div id="content-wrap">
+        <header data-bs-theme="dark">
+            <div class="nav">
+                <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="#"></a> <!--   keep for posable brand after talking to buddy     -->
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarCollapse">
+                            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="{% url 'classes' %}">Classes</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="{% url 'blog' %}">Blog</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="{% url 'about' %}">About</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="{% url 'movie' %}">L6 bainite movie</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="{% url 'gallery' %}">Gallery</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="{% url 'order_form' %}">Order a sword
+                                        from Omimi</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="{% url 'sales' %}">Sales</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+        
+
+            <!-- Marketing messaging and featurettes
+    ================================================== -->
+            <!-- Wrap the rest of the page in another container to center all the content. -->
+
+            <div class="container marketing">
+
+                
+                <!-- photo should be along side the about page. like an ado-biography  -->
+
+                <!-- START THE FEATURETTES -->
+
+                <!-- this page is the test for a image background -->
+                <div class="about_pic">
+                    <div class="image">
+                        <img class="Profile_pic" src="{% static 'profile_pic_1.png' %}" style="width: 150px; height: 150px" />
+                    </div>
+                </div>
+
+                <div class="about_info">
+                    <h4>Howard Clark</h4>
+                    <p>
+                        Howard Clark is Omimi. Big Ear. The most sought after maker of Japanese style sword blades. The creator of the L6 Banite
+                        Katana which is hands down the highest performance sword blade in the world. Omimi-san has been a bladesmith for over 30
+                        years. Early on he mastered forging, damascus, and distal symmetry. As Morgan Valley Forge Howard produced knives with
+                        organic flow and keen balance. Everything he made was meant to be used and felt right in the hand. The natural style of
+                        his work in straight fixed blades and folders is distinctive.
+                        </br>
+                        </br>
+                        Howard delved deep into the science of metallurgy. Teaching himself how to read isothermal transformation diagrams he
+                        began the journey to create what he desired as the best blade. One that was tough; would not chip, crack or break. One
+                        that was hard enough to hold it’s edge for prolonged use and still be able to be resharpened. Through his research it is
+                        said Howard broke more blades deliberately than most knife-makers made. With known steel alloys, controlled
+                        temperatures, the test of the metal was in the heat treatment.
+                        </br>
+                        </br>
+                        It is interesting to see so much of what is now readily accepted as standard practice and regurgitated on internet
+                        forums and bulletin boards came originally from Howard Clark. It was a long time coming. At the git go the
+                        good-old-boys-club of knife making didn’t want to accept what this upstart was teaching. They didn’t want to hear: that
+                        blind procedure without analysis could not produce consistent quality blades; that color of a hot blade prior to
+                        quenching was subjective; that besides carbon content other alloys in a steel also played roles and changed the dynamics
+                        of the heat treatment dance for a given steel to get the desired end product.
+                        </br>
+                        </br>
+                        There are multiple reasons and much history in why Omimi is the sole source of the L6 Banite Katana. Why the Omimi 1086
+                        Katana will out match the majority of Japanese style blades and the Omimi L6 is the quantum leap beyond. It is his
+                        genius level intellect. It is his hard working hands that create. It is his eye that can look down all surfaces of a 30
+                        inch katana and see where the plane is a few thousandths of an inch off. It is Omimi.
+                        </br>
+                        </br>
+                        Welcome to the Morgan Valley Forge site. Thank you for visiting.
+                    </p>
+                </div>
+
+                <!-- /END THE FEATURETTES -->
+
+            </div>
+        <!-- /.container -->
+
+
+            <!-- FOOTER -->
+            
+
+            </div>
+            <footer id="container_footer">
+                <p class="float-end"><a href="#">Back to top</a></p>
+                <p>&copy; Morgan Valley forge since 1988.</p>
+            </footer>
+            
+            
+        </main>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+        
+    </div>
+    <div class="coming-soon">
+        <h1>Coming Soon</h1>
+        <p>Our website is currently under construction. Please check back later!</p>
+    </div>
+
+</body>
+
+</html>

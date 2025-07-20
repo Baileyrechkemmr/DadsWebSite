@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+
+<!-- AWS-powered blog template - replaces blog.html -->
+{% load static %}
+
+<head>
+    <script src="/docs/5.3/assets/js/color-modes.js"></script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Howard Clark's Sword Making Blog - Powered by AWS">
+    <meta name="author" content="Howard Clark">
+    <title>Omimi Blog - AWS Powered</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        /* Existing styles from blog.html */
+        .bd-placeholder-img {
+            font-size: 1.125rem; 
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (max-width: 767px) {
+            .container_marketing {
+                display: none;
+            }
+            .blog_post {
+                border: 4px solid red;
+            }
+        }
+
+        .container_blog{
+            display: flex;
+            flex-direction: column-reverse;
+            overflow-y: scroll;
+            border-radius: 10px;
+            scrollbar-width: thin;
+            scrollbar-color: transparent transparent;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            margin: 5%;
+            background-color: rgb(107, 109, 109);
+            max-height: 70vh;
+            max-width: 75%;
+            box-shadow: rgb(0, 0, 0) 5px 5px 15px 5px;
+        }
+        
+        .container_blog::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .container_blog::-webkit-scrollbar-thumb {
+            background-color: transparent;
+        }
+
+        .container_blog::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+
+        .blog_post {
+            margin: 20px;
+            padding: 20px;
+            background-color: #f2f2f2;
+            border-radius: 10px;
+            position: relative;
+        }
+        
+        .blog_post .blog_meta {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .blog_post .blog_content {
+            line-height: 1.6;
+        }
+        
+        .blog_images img {
+            max-width: 100%;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .blog_tags {
+            margin-top: 15px;
+        }
+        
+        .blog_tag {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            margin-right: 5px;
+            text-decoration: none;
+        }
+        
+        .blog_tag:hover {
+            background: #0056b3;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .aws_powered {
+            background: linear-gradient(45deg, #ff9a00, #ff6900);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        
+        .search_bar {
+            margin: 20px;
+            padding: 10px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 8px;
+        }
+        
+        .pagination_container {
+            margin: 20px;
+            text-align: center;
+        }
+        
+        .no_posts {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-style: italic;
+        }
+
+        body {
+            background-image: url("{% static 'howard1.jpeg' %}");
+            background-size: 75%;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            background-color: rgb(129, 38, 38);
+            backdrop-filter: blur(5px);
+        }
+        
+        .container_marketing {
+            display: flex;
+            flex-direction: row-reverse;
+        }
+
+        .blog_pic {
+            width: 100%;
+            margin-left: 3%;
+            background-color: rgba(128, 128, 128, 0.842);
+            padding: 7px;
+            border-radius: 10px;
+            box-shadow: rgb(0, 0, 0) 5px 5px 15px 5px;
+            margin-bottom: 10%;
+            margin-top: 20px;
+        }
+
+        .pic {
+            padding-top: 10px;
+            margin-left: 10%;
+            margin-right: 10%;
+            margin-bottom: 20%;
+        }
+        
+        img {
+            border-radius: 10px;
+        }
+        
+        .container_footer {
+            background-color: grey;
+            height: 40px;
+            margin-top: 8%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation (copied from original) -->
+    <header data-bs-theme="dark">
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'classes' %}">Classes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'aws_blog' %}">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'about' %}">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'movie' %}">L6 bainite movie</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'gallery' %}">Gallery</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'order_form' %}">Order a sword from Omimi</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'sales' %}">Sales</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <br/><br/><br/>
+        
+        <div class="item_contarner">
+            <!-- Profile picture section -->
+            <div class="blog_pic">
+                <div class="pic">
+                    <img src="{% static 'profile_pic_1.png' %}" width="100%" height="250" />
+                </div>
+                <div class="bio_info">
+                    <p>A Look into the Life of Howard Clark and his Animal companions</p>
+                    <div class="aws_powered">⚡ Powered by AWS</div>
+                </div>
+            </div>
+            
+            <!-- Blog content -->
+            <div class="container_marketing">
+                <div class="container_blog">
+                    <!-- Search bar -->
+                    <div class="search_bar">
+                        <form method="GET" action="{% url 'aws_blog_search' %}">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="q" placeholder="Search blog posts..." value="{{ search_query|default:'' }}">
+                                <button class="btn btn-outline-secondary" type="submit">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    {% if blogs %}
+                        {% for blog in blogs %}
+                            <div class="blog_post">
+                                <!-- Blog metadata -->
+                                <div class="blog_meta">
+                                    <strong>{{ blog.title|default:"Untitled Post" }}</strong>
+                                    {% if blog.created_date %}
+                                        <span class="float-end">{{ blog.created_date|date:"F d, Y" }}</span>
+                                    {% endif %}
+                                    {% if blog.view_count %}
+                                        <br><small>👁 {{ blog.view_count }} views</small>
+                                    {% endif %}
+                                </div>
+                                
+                                <!-- Blog images -->
+                                {% if blog.image_list %}
+                                    <div class="blog_images">
+                                        {% for image_url in blog.image_list %}
+                                            <img src="{{ image_url }}" alt="Blog image" style="max-width: 200px; margin: 5px;">
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                                
+                                <!-- Images from many-to-many relationship -->
+                                {% for blog_image in blog.blog_images.all %}
+                                    {% if blog_image.image %}
+                                        <img src="{{ blog_image.image.url }}" alt="{{ blog_image.alt_text|default:'Blog Image' }}" style="max-width: 200px; margin: 5px;">
+                                    {% endif %}
+                                {% endfor %}
+                                
+                                <!-- Blog content -->
+                                <div class="blog_content">
+                                    {{ blog.content|safe }}
+                                </div>
+                                
+                                <!-- Tags -->
+                                {% if blog.get_tags_list %}
+                                    <div class="blog_tags">
+                                        {% for tag in blog.get_tags_list %}
+                                            <a href="{% url 'aws_blog_by_tag' tag %}" class="blog_tag">{{ tag }}</a>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                                
+                                <!-- Read more link -->
+                                <div class="mt-3">
+                                    <a href="{% url 'aws_blog_detail' blog.blog_id %}" class="btn btn-sm btn-primary">Read Full Post</a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        
+                        <!-- Pagination -->
+                        {% if is_paginated %}
+                            <div class="pagination_container">
+                                <nav aria-label="Blog pagination">
+                                    <ul class="pagination justify-content-center">
+                                        {% if page_obj.has_previous %}
+                                            <li class="page-item">
+                                                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                                            </li>
+                                        {% endif %}
+                                        
+                                        <li class="page-item active">
+                                            <span class="page-link">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+                                        </li>
+                                        
+                                        {% if page_obj.has_next %}
+                                            <li class="page-item">
+                                                <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                                            </li>
+                                        {% endif %}
+                                    </ul>
+                                </nav>
+                            </div>
+                        {% endif %}
+                    {% else %}
+                        <div class="no_posts">
+                            <h3>No blog posts yet</h3>
+                            <p>Check back soon for updates!</p>
+                            {% if user.is_staff %}
+                                <a href="/admin/projects/dynamodblogpost/add/" class="btn btn-primary">Add First Post</a>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <footer class="container_footer">
+            <p class="float-end"><a href="#">Back to top</a></p>
+            <p>&copy; Morgan Valley forge since 1988 - Powered by AWS</p>
+        </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test S3 Image</title>
+</head>
+<body>
+    <h1>Testing S3 Image Access</h1>
+    <img id="testImage" style="max-width: 500px; border: 1px solid red;" />
+    <div id="error" style="color: red;"></div>
+    <div id="success" style="color: green;"></div>
+    <script>
+        // The image URL from your gallery page
+        const imageUrl = 'https://ominisword-images.s3.amazonaws.com/static/static/dadsBanerOne.jpeg?AWSAccessKeyId=AKIA5U2WQX5EAOEEPUUL&Signature=rHBt3tJkX8wULyIi31T2gaO3k5I%3D&Expires=1752962874';
+        
+        const img = document.getElementById('testImage');
+        img.src = imageUrl;
+        
+        img.onload = function() {
+            document.getElementById('success').innerText = 'Image loaded successfully!';
+        };
+        
+        img.onerror = function() {
+            document.getElementById('error').innerText = 'Error loading image: ' + imageUrl;
+        };
+    </script>
+</body>
+</html>
