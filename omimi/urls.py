@@ -19,11 +19,16 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.views.static import serve
 from django.urls import re_path
+from django.http import JsonResponse
 import projects
 import projects.views
 
+def health_check(request):
+    """Simple health check endpoint for Railway deployment"""
+    return JsonResponse({"status": "healthy", "message": "Django app is running"})
 
 urlpatterns = [
+    path('health/', health_check, name='health_check'),
     path('admin/', admin.site.urls),
     path('', projects.views.home, name='home'),
     path('about/', projects.views.about, name='about'),
