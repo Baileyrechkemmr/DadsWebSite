@@ -45,6 +45,14 @@ EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='')
 
 ALLOWED_HOSTS = ['*']
 
+# CSRF Trusted Origins for Railway deployment
+CSRF_TRUSTED_ORIGINS = [
+    'https://dadswebsite-production.up.railway.app',
+    'https://*.up.railway.app',  # Allows any Railway subdomain
+    'http://127.0.0.1:8000',     # Local development
+    'http://localhost:8000',     # Local development alternative
+]
+
 # Application definition
 
 INSTALLED_APPS = [
