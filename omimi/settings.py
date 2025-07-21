@@ -285,10 +285,11 @@ AWS_S3_OBJECT_PARAMETERS = {
 USE_S3 = env.bool('USE_S3', default=True)
 
 if USE_S3 and AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY and AWS_STORAGE_BUCKET_NAME:
-    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    # Use custom storage backend for media files
+    DEFAULT_FILE_STORAGE = 'projects.storage_backends.MediaStorage'
     AWS_QUERYSTRING_AUTH = True  # Enable signed URLs for private bucket access
     AWS_QUERYSTRING_EXPIRE = 3600  # URLs expire after 1 hour
-    AWS_LOCATION = env('AWS_LOCATION', default='')  # Empty string = root of bucket
+    AWS_LOCATION = env('AWS_LOCATION', default='media')  # Store media files in 'media' folder
 else:
     # Use local file storage for development
     MEDIA_URL = '/media/'
@@ -306,12 +307,13 @@ AWS_S3_ENDPOINT_URL = 'https://s3.amazonaws.com'
 
 # Configure static files storage based on S3 availability
 if USE_S3 and AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY and AWS_STORAGE_BUCKET_NAME:
-    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    # Use custom storage backend for static files
+    STATICFILES_STORAGE = 'projects.storage_backends.StaticStorage'
+    # Override STATIC_URL to point directly to S3 static folder
+    STATIC_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/static/'
 else:
     STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
-
-# Static URL - simple and consistent
-STATIC_URL = '/static/'
+    STATIC_URL = '/static/'
 
 # DynamoDB Settings for Blog Posts
 DYNAMODB_BLOG_TABLE = env('DYNAMODB_BLOG_TABLE', default='omimi-blog-posts')
