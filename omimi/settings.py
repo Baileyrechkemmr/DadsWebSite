@@ -294,7 +294,7 @@ else:
     MEDIA_URL = '/media/'
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 # S3 URL Configuration for cross-platform compatibility
-AWS_S3_SIGNATURE_VERSION = 's3v4'    # Use signature version 4 for better region support
+AWS_S3_SIGNATURE_VERSION = 's3v4'    # Use signature version 4 (more secure)
 AWS_S3_ADDRESSING_STYLE = 'virtual'  # Use virtual-hosted style URLs which work better cross-platform
 AWS_S3_USE_SSL = True                # Ensure SSL is used for security
 
@@ -305,7 +305,10 @@ AWS_S3_ENDPOINT_URL = 'https://s3.amazonaws.com'
 # MEDIA_URL will be generated automatically by the storage backend
 
 # Use S3 for static files to ensure cross-platform compatibility
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'projects.storage_backends.StaticStorage'
+
+# Override STATIC_URL to use direct S3 URLs for static files (no pre-signed URLs)
+STATIC_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/static/'
 
 # DynamoDB Settings for Blog Posts
 DYNAMODB_BLOG_TABLE = env('DYNAMODB_BLOG_TABLE', default='omimi-blog-posts')
