@@ -272,9 +272,9 @@ CKEDITOR_5_CONFIGS = {
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # AWS S3 Settings - ENABLED FOR S3 INTEGRATION
-AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID', default='')
-AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY', default='')
-AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME', default='')
+AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID', default=None)
+AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY', default=None)
+AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME', default=None)
 AWS_S3_REGION_NAME = env('AWS_S3_REGION', default='us-east-1')
 AWS_DEFAULT_ACL = None  # Modern S3 buckets don't use ACLs
 AWS_S3_OBJECT_PARAMETERS = {
@@ -284,7 +284,7 @@ AWS_S3_OBJECT_PARAMETERS = {
 # S3 Media Settings - ENABLED with signed URLs for private bucket
 USE_S3 = env.bool('USE_S3', default=True)
 
-if USE_S3:
+if USE_S3 and AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY and AWS_STORAGE_BUCKET_NAME:
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     AWS_QUERYSTRING_AUTH = True  # Enable signed URLs for private bucket access
     AWS_QUERYSTRING_EXPIRE = 3600  # URLs expire after 1 hour
@@ -304,15 +304,14 @@ AWS_S3_ENDPOINT_URL = 'https://s3.amazonaws.com'
 # For private buckets, don't set MEDIA_URL - let Django generate signed URLs
 # MEDIA_URL will be generated automatically by the storage backend
 
-# Configure static files storage based on USE_S3 setting
-if USE_S3 and AWS_STORAGE_BUCKET_NAME:
-    # Use S3 for static files when properly configured
-    STATICFILES_STORAGE = 'projects.storage_backends.StaticStorage'
-    STATIC_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/static/'
+# Configure static files storage based on S3 availability
+if USE_S3 and AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY and AWS_STORAGE_BUCKET_NAME:
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 else:
-    # Use default Django static files handling
     STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
-    STATIC_URL = '/static/'
+
+# Static URL - simple and consistent
+STATIC_URL = '/static/'
 
 # DynamoDB Settings for Blog Posts
 DYNAMODB_BLOG_TABLE = env('DYNAMODB_BLOG_TABLE', default='omimi-blog-posts')
