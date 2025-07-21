@@ -15,3 +15,5 @@ class MediaStorage(S3Boto3Storage):
     file_overwrite = False
     # Keep query string auth for media files (they might be private)
     querystring_auth = True
+    # Set default ACL to None (use bucket default)
+    default_acl = None
