@@ -272,9 +272,9 @@ CKEDITOR_5_CONFIGS = {
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # AWS S3 Settings - ENABLED FOR S3 INTEGRATION
-AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
+AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID', default='')
+AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY', default='')
+AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME', default='')
 AWS_S3_REGION_NAME = env('AWS_S3_REGION', default='us-east-1')
 AWS_DEFAULT_ACL = None  # Modern S3 buckets don't use ACLs
 AWS_S3_OBJECT_PARAMETERS = {
@@ -308,7 +308,12 @@ AWS_S3_ENDPOINT_URL = 'https://s3.amazonaws.com'
 STATICFILES_STORAGE = 'projects.storage_backends.StaticStorage'
 
 # Override STATIC_URL to use direct S3 URLs for static files (no pre-signed URLs)
-STATIC_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/static/'
+# Only set if USE_S3 is True and AWS_STORAGE_BUCKET_NAME is not empty
+if USE_S3 and AWS_STORAGE_BUCKET_NAME:
+    STATIC_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/static/'
+else:
+    # Fallback to default static URL
+    STATIC_URL = '/static/'
 
 # DynamoDB Settings for Blog Posts
 DYNAMODB_BLOG_TABLE = env('DYNAMODB_BLOG_TABLE', default='omimi-blog-posts')
