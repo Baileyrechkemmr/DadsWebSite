@@ -280,6 +280,8 @@ AWS_DEFAULT_ACL = None  # Modern S3 buckets don't use ACLs
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
+# Disable ACL usage completely for modern S3 buckets
+AWS_S3_FILE_OVERWRITE = False
 
 # S3 Media Settings - ENABLED with signed URLs for private bucket
 USE_S3 = env.bool('USE_S3', default=True)

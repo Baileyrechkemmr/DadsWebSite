@@ -6,8 +6,8 @@ class StaticStorage(S3Boto3Storage):
     file_overwrite = False
     # Disable query string auth for static files - they should be public
     querystring_auth = False
-    # Set public-read ACL for static files
-    default_acl = 'public-read'
+    # Don't set ACL - use bucket default (modern S3 buckets have ACLs disabled)
+    default_acl = None
 
 
 class MediaStorage(S3Boto3Storage):
@@ -15,5 +15,5 @@ class MediaStorage(S3Boto3Storage):
     file_overwrite = False
     # Keep query string auth for media files (they might be private)
     querystring_auth = True
-    # Set default ACL to None (use bucket default)
+    # Don't set ACL - use bucket default (modern S3 buckets have ACLs disabled)
     default_acl = None
