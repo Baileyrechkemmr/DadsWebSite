@@ -4,7 +4,7 @@
     "builder": "NIXPACKS"
   },
   "deploy": {
-    "startCommand": "python manage.py migrate && python manage.py create_superuser_from_env && (python manage.py collectstatic --noinput || echo 'Collectstatic failed, continuing...') && gunicorn omimi.wsgi:application --bind 0.0.0.0:$PORT --timeout 120 --workers 2",
+    "startCommand": "python3 manage.py migrate && python3 manage.py create_superuser_from_env && (python3 manage.py collectstatic --noinput || echo 'Collectstatic failed, continuing...') && python3 -m gunicorn omimi.wsgi:application --bind 0.0.0.0:$PORT --timeout 120 --workers 2",
     "healthcheckPath": "/health/",
     "healthcheckTimeout": 180,
     "restartPolicyType": "ON_FAILURE",
