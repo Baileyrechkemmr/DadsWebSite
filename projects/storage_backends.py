@@ -14,7 +14,8 @@ class StaticStorage(S3Boto3Storage):
         super().__init__(*args, **kwargs)
         # Ensure we use the bucket name from settings
         from django.conf import settings
-        self.custom_domain = f'{settings.AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+        if settings.AWS_STORAGE_BUCKET_NAME:
+            self.custom_domain = f'{settings.AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 
 
 class MediaStorage(S3Boto3Storage):

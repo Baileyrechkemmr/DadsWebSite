@@ -304,15 +304,14 @@ AWS_S3_ENDPOINT_URL = 'https://s3.amazonaws.com'
 # For private buckets, don't set MEDIA_URL - let Django generate signed URLs
 # MEDIA_URL will be generated automatically by the storage backend
 
-# Use S3 for static files to ensure cross-platform compatibility
-STATICFILES_STORAGE = 'projects.storage_backends.StaticStorage'
-
-# Override STATIC_URL to use direct S3 URLs for static files (no pre-signed URLs)
-# Only set if USE_S3 is True and AWS_STORAGE_BUCKET_NAME is not empty
+# Configure static files storage based on USE_S3 setting
 if USE_S3 and AWS_STORAGE_BUCKET_NAME:
+    # Use S3 for static files when properly configured
+    STATICFILES_STORAGE = 'projects.storage_backends.StaticStorage'
     STATIC_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/static/'
 else:
-    # Fallback to default static URL
+    # Use default Django static files handling
+    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
     STATIC_URL = '/static/'
 
 # DynamoDB Settings for Blog Posts
