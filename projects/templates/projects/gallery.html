@@ -298,6 +298,14 @@
 
             <!-- START THE FEATURETTES -->
             <div class="card_container">
+                <!-- Debug Information -->
+                <div style="background: #f0f0f0; padding: 10px; margin: 10px; border-radius: 5px; width: 100%;">
+                    <h4>Debug Info:</h4>
+                    <p>Sword Images: {{ debug_info.sword_imgs_count }}</p>
+                    <p>Sword Sales: {{ debug_info.sword_sales_count }}</p>
+                    <p>Blog Images: {{ debug_info.blog_images_count }}</p>
+                </div>
+                
                 <!-- Gallery Sword Images -->
                 {% for sword_img in sword_imgs %}
                 {% if sword_img.image %}
@@ -311,6 +319,12 @@
                     </div>
                 </div>
                 {% endif %}
+                {% empty %}
+                <div class="card" style="width: 18rem; background: #ffeeee;">
+                    <div class="card-body">
+                        <h5 class="card-title">No Gallery Sword Images Found</h5>
+                    </div>
+                </div>
                 {% endfor %}
                 
                 <!-- Sales Sword Images -->
@@ -327,6 +341,12 @@
                     </div>
                 </div>
                 {% endif %}
+                {% empty %}
+                <div class="card" style="width: 18rem; background: #ffeeee;">
+                    <div class="card-body">
+                        <h5 class="card-title">No Sales Sword Images Found</h5>
+                    </div>
+                </div>
                 {% endfor %}
                 
                 <!-- Blog Images -->
@@ -342,6 +362,12 @@
                     </div>
                 </div>
                 {% endif %}
+                {% empty %}
+                <div class="card" style="width: 18rem; background: #ffeeee;">
+                    <div class="card-body">
+                        <h5 class="card-title">No Blog Images Found</h5>
+                    </div>
+                </div>
                 {% endfor %}
             </div>
             <!-- /END THE FEATURETTES -->
