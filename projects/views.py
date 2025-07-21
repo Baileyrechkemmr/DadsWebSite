@@ -66,8 +66,19 @@ def blog(request):
 
 
 def gallery(request):
-    swords = Sword_img.objects
-    return render(request, 'projects/gallery.html', {'swords': swords})
+    # Get all images from different sources for comprehensive gallery
+    sword_imgs = Sword_img.objects.all()
+    sword_sales = Sword_sales.objects.all()
+    blog_images = BlogImages.objects.all()
+    
+    # Create a unified context with all image sources
+    context = {
+        'sword_imgs': sword_imgs,
+        'sword_sales': sword_sales, 
+        'blog_images': blog_images,
+        'swords': sword_imgs  # Keep backwards compatibility
+    }
+    return render(request, 'projects/gallery.html', context)
 
 
 def details_s(request, sword_img_id):

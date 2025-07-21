@@ -298,16 +298,50 @@
 
             <!-- START THE FEATURETTES -->
             <div class="card_container">
-                {% for sword_img in swords.all %}
+                <!-- Gallery Sword Images -->
+                {% for sword_img in sword_imgs %}
+                {% if sword_img.image %}
                 <div class="card" style="width: 18rem;">
                     <img src="{{ sword_img.image.url }}" class="card-img-top" alt="{{ sword_img.image }}">
                     <div class="card-body">
-                        <h5 class="card-title">Sword {{ sword_img.item_number }}</h5>
+                        <h5 class="card-title">Gallery Sword {{ sword_img.item_number }}</h5>
                         <button class="button">
                             <a class="button_color" href="{% url 'details_s' sword_img.id %}" class="btn btn-primary">Learn more</a>
                         </button>
                     </div>
                 </div>
+                {% endif %}
+                {% endfor %}
+                
+                <!-- Sales Sword Images -->
+                {% for sword_sale in sword_sales %}
+                {% if sword_sale.image %}
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ sword_sale.image.url }}" class="card-img-top" alt="{{ sword_sale.image }}">
+                    <div class="card-body">
+                        <h5 class="card-title">For Sale - Sword {{ sword_sale.item_number }}</h5>
+                        <p class="card-text">Price: {{ sword_sale.price }}</p>
+                        <button class="button">
+                            <a class="button_color" href="{% url 'details_sales' sword_sale.id %}" class="btn btn-primary">Learn more</a>
+                        </button>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+                
+                <!-- Blog Images -->
+                {% for blog_img in blog_images %}
+                {% if blog_img.image %}
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ blog_img.image.url }}" class="card-img-top" alt="{{ blog_img.image }}">
+                    <div class="card-body">
+                        <h5 class="card-title">Blog Image</h5>
+                        <button class="button">
+                            <a class="button_color" href="/blog/" class="btn btn-primary">View Blog</a>
+                        </button>
+                    </div>
+                </div>
+                {% endif %}
                 {% endfor %}
             </div>
             <!-- /END THE FEATURETTES -->
