@@ -169,7 +169,8 @@ def details_sales(request, sword_sales_id):
 
 
 def gallery_detail(request, gallery_id):
-    """Display detailed view of a gallery item"""
+    """Display detailed view of a gallery item using existing details_s template"""
     from .models import Gallery
     gallery_item = get_object_or_404(Gallery, pk=gallery_id)
-    return render(request, 'projects/gallery_detail.html', {'gallery_item': gallery_item})
+    # Use existing details_s.html template by mapping gallery fields to sword fields
+    return render(request, 'projects/details_s.html', {'sword': gallery_item})
