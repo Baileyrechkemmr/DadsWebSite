@@ -49,6 +49,7 @@ ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = [
     'https://dadswebsite-production.up.railway.app',
     'https://*.up.railway.app',  # Allows any Railway subdomain
+    'https://*.railway.app',     # Additional Railway domains
     'http://127.0.0.1:8000',     # Local development
     'http://localhost:8000',     # Local development alternative
 ]
@@ -284,7 +285,8 @@ AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID', default=None)
 AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY', default=None)
 AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME', default=None)
 AWS_S3_REGION_NAME = env('AWS_S3_REGION', default='us-east-1')
-AWS_DEFAULT_ACL = None  # Modern S3 buckets don't use ACLs
+# Modern S3 buckets use bucket policies instead of ACLs
+AWS_DEFAULT_ACL = None
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }

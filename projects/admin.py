@@ -41,8 +41,16 @@ class Sword_imgAdmin(admin.ModelAdmin):
 @admin.register(Sword_sales)
 class Sword_salesAdmin(admin.ModelAdmin):
     def thumbnail(self, obj):
-        if obj.image:
-            return format_html('<img src="{}" width="50" height="50" style="object-fit: cover; border-radius: 4px;" />', obj.image.url)
+        try:
+            if obj.image and hasattr(obj.image, 'url'):
+                return format_html(
+                    '<img src="{}" width="50" height="50" '
+                    'style="object-fit: cover; border-radius: 4px;" '
+                    'onerror="this.style.display=\'none\'" />', 
+                    obj.image.url
+                )
+        except Exception as e:
+            return f"Image Error: {str(e)[:50]}"
         return "No Image"
     thumbnail.short_description = 'Preview'
 
@@ -65,8 +73,16 @@ class BlogImagesInline(admin.TabularInline):
 @admin.register(BlogImages)
 class BlogImagesAdmin(admin.ModelAdmin):
     def thumbnail(self, obj):
-        if obj.image:
-            return format_html('<img src="{}" width="80" height="60" style="object-fit: cover; border-radius: 4px;" />', obj.image.url)
+        try:
+            if obj.image and hasattr(obj.image, 'url'):
+                return format_html(
+                    '<img src="{}" width="80" height="60" '
+                    'style="object-fit: cover; border-radius: 4px;" '
+                    'onerror="this.style.display=\'none\'" />', 
+                    obj.image.url
+                )
+        except Exception as e:
+            return f"Image Error: {str(e)[:50]}"
         return "No Image"
     thumbnail.short_description = 'Preview'
     
