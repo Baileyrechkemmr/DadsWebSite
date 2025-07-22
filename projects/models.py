@@ -71,9 +71,15 @@ class Blog(models.Model):
     def stripped_rich_field(self):
         return strip_tags(self.description)
     
+    class Meta:
+        ordering = ['-date']  # Show newest posts first
+        verbose_name = 'Blog Post'
+        verbose_name_plural = 'Blog Posts'
     
     def __str__(self):
-        return str(self.date)
+        # Create a more descriptive name using date and a snippet of content
+        content_snippet = self.stripped_rich_field[:50] if self.stripped_rich_field else "No content"
+        return f"Blog Post - {self.date.strftime('%B %d, %Y')} - {content_snippet}..."
 
 
 class Gallery(models.Model):

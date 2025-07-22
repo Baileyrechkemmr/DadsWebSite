@@ -157,7 +157,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+# Set to your local timezone - this prevents date confusion in admin
+# Change this to your actual timezone (e.g., 'America/New_York', 'America/Chicago', 'America/Denver', 'America/Los_Angeles')
+TIME_ZONE = 'America/Chicago'  # Central Time - adjust as needed
 
 USE_I18N = True
 

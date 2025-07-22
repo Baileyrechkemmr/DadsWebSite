@@ -92,10 +92,38 @@ class BlogImagesAdmin(admin.ModelAdmin):
 
 @admin.register(Blog)
 class BlogAdmin(admin.ModelAdmin):
-    list_display = ['date']
-    search_fields = ['date']
+    def content_preview(self, obj):
+        """Show a preview of the blog content"""
+        content = obj.stripped_rich_field
+        if content and content != "null":
+            return content[:100] + "..." if len(content) > 100 else content
+        return "No content"
+    content_preview.short_description = 'Content Preview'
+    
+    def formatted_date(self, obj):
+        """Show a nicely formatted date"""
+        return obj.date.strftime('%B %d, %Y (%A)')
+    formatted_date.short_description = 'Date Created'
+    formatted_date.admin_order_field = 'date'
+    
+    list_display = ['formatted_date', 'content_preview']
+    search_fields = ['description', 'date']
     list_filter = ['date']
+    readonly_fields = ['date']  # Make date readonly since it's auto-generated
     inlines = [BlogImagesInline]
+    
+    # Show newest posts first
+    ordering = ['-date']
+    
+    fieldsets = (
+        ('Blog Content', {
+            'fields': ('description',)
+        }),
+        ('Metadata', {
+            'fields': ('date',),
+            'classes': ('collapse',)
+        }),
+    )
 
 
 @admin.register(Gallery)
