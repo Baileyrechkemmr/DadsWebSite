@@ -63,6 +63,7 @@ urlpatterns = [
     path('movie/', projects.views.movie, name='movie'),
     path('gallery/', projects.views.gallery, name='gallery'),
     path('details_s/<int:sword_img_id>',projects.views.details_s, name='details_s'),
+    path('gallery/<int:gallery_id>/', projects.views.gallery_detail, name='gallery_detail'),
     path('order_form/', projects.views.order_form, name='order_form'),
     path('details_h/<int:hotel_id>', projects.views.details_h, name='details_h'),
     path('sales/', projects.views.sales, name='sales'),
