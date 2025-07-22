@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Year, Classes, Sword_img, Hotel, Blog, Sword_sales, BlogImages
+from .models import Year, Classes, Sword_img, Hotel, Blog, Sword_sales, BlogImages, Gallery
 from django.utils.html import format_html
 
 # Import AWS models and admin - temporarily disabled to test S3 images
@@ -96,3 +96,39 @@ class BlogAdmin(admin.ModelAdmin):
     search_fields = ['date']
     list_filter = ['date']
     inlines = [BlogImagesInline]
+
+
+@admin.register(Gallery)
+class GalleryAdmin(admin.ModelAdmin):
+    def thumbnail(self, obj):
+        try:
+            if obj.image and hasattr(obj.image, 'url'):
+                return format_html(
+                    '<img src="{}" width="80" height="60" '
+                    'style="object-fit: cover; border-radius: 4px;" '
+                    'onerror="this.style.display=\'none\'" />', 
+                    obj.image.url
+                )
+        except Exception as e:
+            return f"Image Error: {str(e)[:50]}"
+        return "No Image"
+    thumbnail.short_description = 'Preview'
+    
+    list_display = ['title', 'thumbnail', 'is_active', 'sort_order', 'date_added']
+    list_filter = ['is_active', 'date_added']
+    search_fields = ['title', 'description']
+    list_editable = ['is_active', 'sort_order']
+    readonly_fields = ['thumbnail', 'date_added']
+    
+    fieldsets = (
+        ('Image Information', {
+            'fields': ('title', 'image', 'thumbnail', 'description')
+        }),
+        ('Display Settings', {
+            'fields': ('is_active', 'sort_order')
+        }),
+        ('Metadata', {
+            'fields': ('date_added',),
+            'classes': ('collapse',)
+        }),
+    )

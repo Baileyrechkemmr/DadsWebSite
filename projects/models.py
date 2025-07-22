@@ -74,3 +74,24 @@ class Blog(models.Model):
     
     def __str__(self):
         return str(self.date)
+
+
+class Gallery(models.Model):
+    """
+    Dedicated model for managing gallery images.
+    Only images added here will appear in the gallery page.
+    """
+    title = models.CharField(max_length=200, help_text="Title for the gallery image")
+    image = models.ImageField(upload_to='images/gallery/', blank=False, null=False)
+    description = models.TextField(blank=True, help_text="Optional description for the image")
+    is_active = models.BooleanField(default=True, help_text="Uncheck to hide from gallery")
+    sort_order = models.IntegerField(default=0, help_text="Lower numbers appear first")
+    date_added = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        ordering = ['sort_order', '-date_added']
+        verbose_name = 'Gallery Image'
+        verbose_name_plural = 'Gallery Images'
+    
+    def __str__(self):
+        return self.title

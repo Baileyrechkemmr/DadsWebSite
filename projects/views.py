@@ -66,27 +66,12 @@ def blog(request):
 
 
 def gallery(request):
-    # Get all images from different sources for comprehensive gallery
-    sword_imgs = Sword_img.objects.all()
-    sword_sales = Sword_sales.objects.all()
-    blog_images = BlogImages.objects.all()
+    # Get only active gallery images, ordered by sort_order and date
+    from .models import Gallery
+    gallery_images = Gallery.objects.filter(is_active=True)
     
-    # Debug info to check what's in the database
-    print(f"DEBUG: sword_imgs count: {sword_imgs.count()}")
-    print(f"DEBUG: sword_sales count: {sword_sales.count()}")
-    print(f"DEBUG: blog_images count: {blog_images.count()}")
-    
-    # Create a unified context with all image sources
     context = {
-        'sword_imgs': sword_imgs,
-        'sword_sales': sword_sales, 
-        'blog_images': blog_images,
-        'swords': sword_imgs,  # Keep backwards compatibility
-        'debug_info': {
-            'sword_imgs_count': sword_imgs.count(),
-            'sword_sales_count': sword_sales.count(),
-            'blog_images_count': blog_images.count(),
-        }
+        'gallery_images': gallery_images,
     }
     return render(request, 'projects/gallery.html', context)
 
