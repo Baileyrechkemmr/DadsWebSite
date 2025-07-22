@@ -307,6 +307,11 @@
                         {% if gallery_item.description %}
                         <p class="card-text">{{ gallery_item.description|truncatewords:15 }}</p>
                         {% endif %}
+                        <div class="text-center mt-3">
+                            <button class="button">
+                                <a class="button_color" href="{% url 'gallery_detail' gallery_item.id %}" style="text-decoration: none;">View Details</a>
+                            </button>
+                        </div>
                     </div>
                 </div>
                 {% empty %}

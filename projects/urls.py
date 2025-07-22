@@ -19,6 +19,7 @@ urlpatterns = [
     path('details_s/<int:sword_img_id>/', views.details_s, name='details_s'),
     path('details_h/<int:hotel_id>/', views.details_h, name='details_h'),
     path('details_sales/<int:sword_sales_id>/', views.details_sales, name='details_sales'),
+    path('gallery/<int:gallery_id>/', views.gallery_detail, name='gallery_detail'),
     
     # Legacy blog URL (redirects to AWS blog)
     path('blog/', aws_views.blog_compatibility, name='blog'),

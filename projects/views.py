@@ -166,3 +166,10 @@ def sales(request):
 def details_sales(request, sword_sales_id):
     sword_sales_detail = get_object_or_404(Sword_sales, pk=sword_sales_id)
     return render(request, 'projects/details_sales.html', {'sword_sales_detail': sword_sales_detail})
+
+
+def gallery_detail(request, gallery_id):
+    """Display detailed view of a gallery item"""
+    from .models import Gallery
+    gallery_item = get_object_or_404(Gallery, pk=gallery_id)
+    return render(request, 'projects/gallery_detail.html', {'gallery_item': gallery_item})
