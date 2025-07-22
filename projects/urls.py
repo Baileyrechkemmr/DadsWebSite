@@ -1,5 +1,6 @@
 """
 URL patterns for the projects app with AWS blog integration.
+Updated: Added gallery detail view functionality.
 """
 
 from django.urls import path
