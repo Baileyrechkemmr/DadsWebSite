@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Year, Classes, Sword_img, Hotel, Blog, Sword_sales, BlogImages, Gallery
+from .models import Year, Classes, Sword_img, Hotel, Blog, Sword_sales, Gallery
 from django.utils.html import format_html
 
 # Import AWS models and admin - temporarily disabled to test S3 images
@@ -66,28 +66,7 @@ class HotelAdmin(admin.ModelAdmin):
     list_filter = ['hotel_name']
 
 
-class BlogImagesInline(admin.TabularInline):
-    model = Blog.images.through
-
-
-@admin.register(BlogImages)
-class BlogImagesAdmin(admin.ModelAdmin):
-    def thumbnail(self, obj):
-        try:
-            if obj.image and hasattr(obj.image, 'url'):
-                return format_html(
-                    '<img src="{}" width="80" height="60" '
-                    'style="object-fit: cover; border-radius: 4px;" '
-                    'onerror="this.style.display=\'none\'" />', 
-                    obj.image.url
-                )
-        except Exception as e:
-            return f"Image Error: {str(e)[:50]}"
-        return "No Image"
-    thumbnail.short_description = 'Preview'
-    
-    list_display = ['thumbnail', 'image']
-    readonly_fields = ['thumbnail']
+# BlogImages admin removed - legacy blog system no longer in use
 
 
 @admin.register(Blog)
@@ -110,7 +89,7 @@ class BlogAdmin(admin.ModelAdmin):
     search_fields = ['description', 'date']
     list_filter = ['date']
     readonly_fields = ['date']  # Make date readonly since it's auto-generated
-    inlines = [BlogImagesInline]
+    # inlines = [BlogImagesInline]  # Removed - BlogImages no longer in admin
     
     # Show newest posts first
     ordering = ['-date']
