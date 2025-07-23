@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Year, Classes, Sword_img, Hotel, Blog, Sword_sales, Gallery
+from .models import Year, Classes, Hotel, Blog, Sword_sales, Gallery
 from django.utils.html import format_html
 
 # Import AWS models and admin - temporarily disabled to test S3 images
@@ -27,15 +27,15 @@ class ClassesAdmin(admin.ModelAdmin):
     list_filter = ['class_title']
 
 
-@admin.register(Sword_img)
-class Sword_imgAdmin(admin.ModelAdmin):
-    # def thumbnail(self, object):
-    #     return format_html('<img src="{}" width="40" />'.format(object.image.url))
-    
-    # list_display = ['item_number', 'thumbnail']
-    list_display = ['item_number']
-    search_fields = ['item_number']
-    list_filter = ['item_number']
+# @admin.register(Sword_img) - Hidden from admin interface but functionality preserved
+# class Sword_imgAdmin(admin.ModelAdmin):
+#     # def thumbnail(self, object):
+#     #     return format_html('<img src="{}" width="40" />'.format(object.image.url))
+#     
+#     # list_display = ['item_number', 'thumbnail']
+#     list_display = ['item_number']
+#     search_fields = ['item_number']
+#     list_filter = ['item_number']
 
 
 @admin.register(Sword_sales)
