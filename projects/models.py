@@ -30,10 +30,6 @@ class Sword_img(models.Model):
     image = models.ImageField(upload_to='images/', blank=True, null=True)
     description = models.TextField(default="null")
 
-    class Meta:
-        verbose_name = 'Advanced - Sword Image'
-        verbose_name_plural = 'Advanced - Sword Images'
-
     def __str__(self):
         return str(self.item_number)
 
@@ -64,10 +60,6 @@ class Sword_sales(models.Model):
 
 class BlogImages(models.Model):
     image = models.ImageField(upload_to='images/', blank=True, null=True)
-
-    class Meta:
-        verbose_name = 'Advanced - Blog Image'
-        verbose_name_plural = 'Advanced - Blog Images'
 
 
 class Blog(models.Model):
