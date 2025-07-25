@@ -1,6 +1,8 @@
 from django.contrib import admin
 from .models import Year, Classes, Sword_img, Hotel, Blog, Sword_sales, BlogImages, Gallery, OrderSettings
 from django.utils.html import format_html
+from django.shortcuts import redirect
+from django.contrib import messages
 
 # Import AWS models and admin - temporarily disabled to test S3 images
 # from .aws_models import DynamoDBBlogPost, BlogImageS3
@@ -189,8 +191,19 @@ class OrderSettingsAdmin(admin.ModelAdmin):
             )
     status_display.short_description = 'Status'
     
+    def toggle_orders(self, request, queryset):
+        """Admin action to quickly toggle order status"""
+        for obj in queryset:
+            obj.orders_enabled = not obj.orders_enabled
+            obj.save()
+            status = "enabled" if obj.orders_enabled else "disabled"
+            messages.success(request, f'Orders have been {status}!')
+    
+    toggle_orders.short_description = "Toggle order status (Enable/Disable)"
+    
     list_display = ['status_display', 'last_updated']
     readonly_fields = ['disabled_image_preview', 'last_updated']
+    actions = ['toggle_orders']
     
     fieldsets = (
         ('Order Control', {
