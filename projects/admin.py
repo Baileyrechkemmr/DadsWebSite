@@ -222,7 +222,11 @@ class OrderSettingsAdmin(admin.ModelAdmin):
     
     def has_add_permission(self, request):
         # Prevent creating multiple instances (singleton pattern)
-        return not OrderSettings.objects.exists()
+        try:
+            return not OrderSettings.objects.exists()
+        except Exception:
+            # During initial deployment, table might not exist yet
+            return True
     
     def has_delete_permission(self, request, obj=None):
         # Prevent deletion of the settings

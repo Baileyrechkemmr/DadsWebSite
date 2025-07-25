@@ -82,13 +82,18 @@ def details_s(request, sword_img_id):
 
 
 def order_form(request):
-    # Check if orders are enabled
-    order_settings = OrderSettings.get_settings()
-    if not order_settings.orders_enabled:
-        return render(request, 'projects/orders_disabled.html', {
-            'disabled_message': order_settings.disabled_message,
-            'disabled_image': order_settings.disabled_image
-        })
+    # Check if orders are enabled (with error handling for initial deployment)
+    try:
+        order_settings = OrderSettings.get_settings()
+        if not order_settings.orders_enabled:
+            return render(request, 'projects/orders_disabled.html', {
+                'disabled_message': order_settings.disabled_message,
+                'disabled_image': order_settings.disabled_image
+            })
+    except Exception:
+        # If OrderSettings table doesn't exist yet (before migration), 
+        # default to orders enabled to maintain existing functionality
+        pass
     
     if request.method == 'POST':
         email = request.POST.get('email', '')
