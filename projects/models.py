@@ -101,3 +101,44 @@ class Gallery(models.Model):
     
     def __str__(self):
         return self.title
+
+
+class OrderSettings(models.Model):
+    """
+    Singleton model to control order functionality site-wide.
+    Only one instance should exist.
+    """
+    orders_enabled = models.BooleanField(
+        default=True, 
+        help_text="Uncheck to disable all order functionality and show 'no longer accepting orders' message"
+    )
+    disabled_message = models.TextField(
+        default="No longer accepting orders at this time",
+        help_text="Message to display when orders are disabled"
+    )
+    disabled_image = models.ImageField(
+        upload_to='images/system/', 
+        blank=True, 
+        null=True,
+        help_text="Optional image to display when orders are disabled"
+    )
+    last_updated = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        verbose_name = 'Order Settings'
+        verbose_name_plural = 'Order Settings'
+    
+    def __str__(self):
+        status = "Enabled" if self.orders_enabled else "Disabled"
+        return f"Order Settings - {status}"
+    
+    def save(self, *args, **kwargs):
+        # Ensure only one instance exists (singleton pattern)
+        self.pk = 1
+        super().save(*args, **kwargs)
+    
+    @classmethod
+    def get_settings(cls):
+        """Get or create the singleton settings instance"""
+        settings, created = cls.objects.get_or_create(pk=1)
+        return settings

@@ -6,7 +6,7 @@ from django.template.loader import render_to_string
 from django.core.mail import send_mail
 from django.conf import settings
 
-from .models import Year, Classes, Sword_img, Hotel, Blog, Sword_sales, BlogImages
+from .models import Year, Classes, Sword_img, Hotel, Blog, Sword_sales, BlogImages, OrderSettings
 # Create your views here.
 
 
@@ -82,6 +82,14 @@ def details_s(request, sword_img_id):
 
 
 def order_form(request):
+    # Check if orders are enabled
+    order_settings = OrderSettings.get_settings()
+    if not order_settings.orders_enabled:
+        return render(request, 'projects/orders_disabled.html', {
+            'disabled_message': order_settings.disabled_message,
+            'disabled_image': order_settings.disabled_image
+        })
+    
     if request.method == 'POST':
         email = request.POST.get('email', '')
         name = request.POST.get('name', '')

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Year, Classes, Sword_img, Hotel, Blog, Sword_sales, BlogImages, Gallery
+from .models import Year, Classes, Sword_img, Hotel, Blog, Sword_sales, BlogImages, Gallery, OrderSettings
 from django.utils.html import format_html
 
 # Import AWS models and admin - temporarily disabled to test S3 images
@@ -160,3 +160,57 @@ class GalleryAdmin(admin.ModelAdmin):
             'classes': ('collapse',)
         }),
     )
+
+
+@admin.register(OrderSettings)
+class OrderSettingsAdmin(admin.ModelAdmin):
+    def disabled_image_preview(self, obj):
+        try:
+            if obj.disabled_image and hasattr(obj.disabled_image, 'url'):
+                return format_html(
+                    '<img src="{}" width="200" height="150" '
+                    'style="object-fit: cover; border-radius: 4px;" '
+                    'onerror="this.style.display=\'none\'" />', 
+                    obj.disabled_image.url
+                )
+        except Exception as e:
+            return f"Image Error: {str(e)[:50]}"
+        return "No Image"
+    disabled_image_preview.short_description = 'Preview'
+    
+    def status_display(self, obj):
+        if obj.orders_enabled:
+            return format_html(
+                '<span style="color: green; font-weight: bold;">✓ Orders Enabled</span>'
+            )
+        else:
+            return format_html(
+                '<span style="color: red; font-weight: bold;">✗ Orders Disabled</span>'
+            )
+    status_display.short_description = 'Status'
+    
+    list_display = ['status_display', 'last_updated']
+    readonly_fields = ['disabled_image_preview', 'last_updated']
+    
+    fieldsets = (
+        ('Order Control', {
+            'fields': ('orders_enabled',),
+            'description': 'Use this setting to enable or disable all order functionality across the website.'
+        }),
+        ('Disabled Orders Display', {
+            'fields': ('disabled_message', 'disabled_image', 'disabled_image_preview'),
+            'description': 'Configure what visitors see when orders are disabled.'
+        }),
+        ('System Information', {
+            'fields': ('last_updated',),
+            'classes': ('collapse',)
+        }),
+    )
+    
+    def has_add_permission(self, request):
+        # Prevent creating multiple instances (singleton pattern)
+        return not OrderSettings.objects.exists()
+    
+    def has_delete_permission(self, request, obj=None):
+        # Prevent deletion of the settings
+        return False
