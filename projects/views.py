@@ -47,7 +47,7 @@ def classes(request):
         send_mail(
             'class singe up form',  # email titel
             messages,  # messages
-            'settings.EMAIL_HOST_USER',  # email for site
+            settings.EMAIL_HOST_USER,  # email for site
             ['bigearincornpatch@gmail.com'],  # email of recever
             fail_silently=False)
     year = Year.objects
@@ -128,7 +128,7 @@ def order_form(request):
         send_mail(
             'Sword order form', #email titel
             messages, # messages
-            'settings.EMAIL_HOST_USER', #email for site
+            settings.EMAIL_HOST_USER, #email for site
             ['bigearincornpatch@gmail.com'],  # email of recever
         fail_silently=False)
     return render(request, 'projects/order_form.html', )
@@ -167,7 +167,7 @@ def sales(request):
         send_mail(
             'Sales order form',  # email titel
             messages,  # messages
-            'settings.EMAIL_HOST_USER',  # email for site
+            settings.EMAIL_HOST_USER,  # email for site
             ['bigearincornpatch@gmail.com'],  # email of recever
             fail_silently=False)
 
