@@ -37,11 +37,11 @@ SECRET_KEY = env('SECRET_KEY', default='django-insecure-91!8xc543hj37*md&s1*wgfr
 DEBUG = env.bool('DEBUG', default=True)
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='brechkemmer01@gmail.com')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='')
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587  # Use 465 for SSL/TLS encryption
 EMAIL_USE_TLS = True  # Use False for SSL/TLS encryption
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='bqtlyuyacnxwbjyj')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='')
 
 ALLOWED_HOSTS = ['*']
 
