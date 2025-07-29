@@ -21,12 +21,12 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='sword_img',
             name='images',
-            field=models.CharField(default='null'),
+            field=models.CharField(default='null', max_length=255),
         ),
         migrations.AddField(
             model_name='sword_sales',
             name='images',
-            field=models.CharField(default='null'),
+            field=models.CharField(default='null', max_length=255),
         ),
         migrations.RemoveField(
             model_name='blog',
@@ -38,6 +38,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='blog',
             name='images',
-            field=models.CharField(default='null'),
+            field=models.CharField(default='null', max_length=255),
         ),
     ]

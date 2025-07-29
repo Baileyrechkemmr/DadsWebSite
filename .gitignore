@@ -2,6 +2,7 @@
 .env
 *.env
 omimi/.env
+venv/
 
 # Database
 db.sqlite3

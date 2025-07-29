@@ -6,17 +6,61 @@ from django.template.loader import render_to_string
 from django.core.mail import send_mail
 from django.conf import settings
 
-from .models import Year, Classes, Sword_img, Hotel, Blog, Sword_sales, BlogImages, OrderSettings
+from .models import Year, Classes, Sword_img, Hotel, Blog, Sword_sales, BlogImages, OrderSettings, PageContent
 # Create your views here.
 
 
 def home(request):
     swords = Sword_img.objects
-    return render(request, 'projects/home.html', {'swords': swords})
+    
+    # Get page content for home page
+    home_classes_description = PageContent.get_content('home_classes_description', 
+        'Have you ever wanted to learn the art of metallurgy? Here at Morgan Valley Forge Howard Clark, Master Swordsmith as well as the creator of the L6 Bainite Katana, offers classes on the ways of forging. Come look at the classes and see if spots are still available!')
+    
+    home_l6_video_description = PageContent.get_content('home_l6_video_description', 
+        'This is a free to view video about how Howard Clark, Omimi-san, created what is considered by many to be the ultimate sword. This 27 minute mini documentary brings together the amazing individuals, the parts they played and their stories of Howard, and the L6 Bainite Katana at the beginning of what has proved to be international history. Thrill to fast paced sword work. Learn what makes Japanese swords Japanese. SEE THE ATTEMPTED ULTIMATE DESTRUCTION OF A FULLY POLISHED AND MOUNTED L6 KATANA. Find out why many consider the Howard Clark L6 Bainite Katana the ultimate sword, a perfect meld of modern practice and traditional Japanese aesthetics.')
+    
+    home_blog_description = PageContent.get_content('home_blog_description', 
+        'Have you ever wanted to know about the man behind the forge? Ever wanted to know what its like in the day to day of a Master Swordsmith? Well Omimi-san was something just for you! In his blog howard talks about his thoughts and amusing things in his day to day life. For a look into the man behind the forge and how Howard came to be, this page Omimi-san has written about his experiences and life skills that he has learned and gained along his journey to become the Master Smith he is today.')
+    
+    footer_copyright = PageContent.get_content('footer_copyright', 
+        'Morgan Valley forge since 1988.')
+    
+    coming_soon_title = PageContent.get_content('coming_soon_title', 'Coming Soon')
+    coming_soon_message = PageContent.get_content('coming_soon_message', 
+        'Our website is currently under construction. Please check back later!')
+    
+    context = {
+        'swords': swords,
+        'home_classes_description': home_classes_description,
+        'home_l6_video_description': home_l6_video_description,
+        'home_blog_description': home_blog_description,
+        'footer_copyright': footer_copyright,
+        'coming_soon_title': coming_soon_title,
+        'coming_soon_message': coming_soon_message,
+    }
+    return render(request, 'projects/home.html', context)
 
 
 def about(request):
-    return render(request, 'projects/about.html')
+    # Get page content for about page
+    about_biography = PageContent.get_content('about_biography', 
+        'Howard Clark is Omimi. Big Ear. The most sought after maker of Japanese style sword blades. The creator of the L6 Banite Katana which is hands down the highest performance sword blade in the world. Omimi-san has been a bladesmith for over 30 years. Early on he mastered forging, damascus, and distal symmetry. As Morgan Valley Forge Howard produced knives with organic flow and keen balance. Everything he made was meant to be used and felt right in the hand. The natural style of his work in straight fixed blades and folders is distinctive.\n\nHoward delved deep into the science of metallurgy. Teaching himself how to read isothermal transformation diagrams he began the journey to create what he desired as the best blade. One that was tough; would not chip, crack or break. One that was hard enough to hold it\'s edge for prolonged use and still be able to be resharpened. Through his research it is said Howard broke more blades deliberately than most knife-makers made. With known steel alloys, controlled temperatures, the test of the metal was in the heat treatment.\n\nIt is interesting to see so much of what is now readily accepted as standard practice and regurgitated on internet forums and bulletin boards came originally from Howard Clark. It was a long time coming. At the git go the good-old-boys-club of knife making didn\'t want to accept what this upstart was teaching. They didn\'t want to hear: that blind procedure without analysis could not produce consistent quality blades; that color of a hot blade prior to quenching was subjective; that besides carbon content other alloys in a steel also played roles and changed the dynamics of the heat treatment dance for a given steel to get the desired end product.\n\nThere are multiple reasons and much history in why Omimi is the sole source of the L6 Banite Katana. Why the Omimi 1086 Katana will out match the majority of Japanese style blades and the Omimi L6 is the quantum leap beyond. It is his genius level intellect. It is his hard working hands that create. It is his eye that can look down all surfaces of a 30 inch katana and see where the plane is a few thousandths of an inch off. It is Omimi.\n\nWelcome to the Morgan Valley Forge site. Thank you for visiting.')
+    
+    footer_copyright = PageContent.get_content('footer_copyright', 
+        'Morgan Valley forge since 1988.')
+    
+    coming_soon_title = PageContent.get_content('coming_soon_title', 'Coming Soon')
+    coming_soon_message = PageContent.get_content('coming_soon_message', 
+        'Our website is currently under construction. Please check back later!')
+    
+    context = {
+        'about_biography': about_biography,
+        'footer_copyright': footer_copyright,
+        'coming_soon_title': coming_soon_title,
+        'coming_soon_message': coming_soon_message,
+    }
+    return render(request, 'projects/about.html', context)
 
 
 def classes(request):
@@ -53,7 +97,56 @@ def classes(request):
     year = Year.objects
     classes = Classes.objects
     hotel = Hotel.objects
-    return render(request, 'projects/classes.html', {'classes': classes, 'hotel': hotel, 'year': year})
+    
+    # Get page content for classes page
+    classes_general_info = PageContent.get_content('classes_general_info', 
+        'Each of these classes will include one day of forging blade(s), grinding, heat treating, and assembling a basic forged carbon steel knife. All classes are limited to four participants\n\n$775 for the week. $700 tuition, plus $75 materials fee')
+    
+    classes_payment_instructions = PageContent.get_content('classes_payment_instructions', 
+        'To secure your spot in any of these classes, Email to howard@mvforge.com, and send a $200 deposit to howard@mvforge.com via PayPal, making sure to mention which class.\n\nBalance due two weeks prior to class start date')
+    
+    classes_address_info = PageContent.get_content('classes_address_info', 
+        'Or mail a check to Howard Clark\n115 35th Place\nRunnells, IA 50237')
+    
+    classes_materials_info = PageContent.get_content('classes_materials_info', 
+        'All required materials will be provided. Blade steel, basic shop supplies, and basic handle materials. Premium materials may be available for additional cost.')
+    
+    classes_equipment_requirements = PageContent.get_content('classes_equipment_requirements', 
+        'You will need long pants, leather shoes, safety glasses, and a dust particle mask of your liking, at least a p95 rating. Bringing snacks or lunch is required, as the shop is in a rural location and lunch is not readily available without driving a few miles')
+    
+    classes_safety_equipment = PageContent.get_content('classes_safety_equipment', 
+        'For forging classes, you may also want an apron as well as gloves to protect your from heat and sparks. Hot mill gloves made from cotton, or cotton chore gloves are advised. Leather can and will shrink fit onto your hand at times, and can exacerbate the burn potential in this way.')
+    
+    classes_practice_recommendations = PageContent.get_content('classes_practice_recommendations', 
+        'If you have no prior forging experience, then some hammer practice time may be in order. One of my dear late friends, Larry Harley, always suggested that folks get a carpenters hammer and a pile of nails, and some scrap lumber, and simply drive nails. It builds accuracy, which is essential to forging success.')
+    
+    classes_one_on_one_info = PageContent.get_content('classes_one_on_one_info', 
+        'It is also possible that we may be able to accommodate one on one lessons at the rate of $500/day, scheduling to be decided. Please inquire via e-mail, howard@mvforge.com')
+    
+    footer_copyright = PageContent.get_content('footer_copyright', 
+        'Morgan Valley forge since 1988.')
+    
+    coming_soon_title = PageContent.get_content('coming_soon_title', 'Coming Soon')
+    coming_soon_message = PageContent.get_content('coming_soon_message', 
+        'Our website is currently under construction. Please check back later!')
+    
+    context = {
+        'classes': classes, 
+        'hotel': hotel, 
+        'year': year,
+        'classes_general_info': classes_general_info,
+        'classes_payment_instructions': classes_payment_instructions,
+        'classes_address_info': classes_address_info,
+        'classes_materials_info': classes_materials_info,
+        'classes_equipment_requirements': classes_equipment_requirements,
+        'classes_safety_equipment': classes_safety_equipment,
+        'classes_practice_recommendations': classes_practice_recommendations,
+        'classes_one_on_one_info': classes_one_on_one_info,
+        'footer_copyright': footer_copyright,
+        'coming_soon_title': coming_soon_title,
+        'coming_soon_message': coming_soon_message,
+    }
+    return render(request, 'projects/classes.html', context)
 
 
 def movie(request):
@@ -86,9 +179,20 @@ def order_form(request):
     try:
         order_settings = OrderSettings.get_settings()
         if not order_settings.orders_enabled:
+            # Get page content for orders disabled page
+            orders_disabled_title = PageContent.get_content('orders_disabled_title', 
+                'Custom Sword Orders Currently Unavailable')
+            orders_disabled_message = PageContent.get_content('orders_disabled_message', 
+                'We apologize for any inconvenience. Please check back later or browse our available swords in the Sales section.')
+            footer_copyright = PageContent.get_content('footer_copyright', 
+                'Morgan Valley forge since 1988.')
+            
             return render(request, 'projects/orders_disabled.html', {
                 'disabled_message': order_settings.disabled_message,
-                'disabled_image': order_settings.disabled_image
+                'disabled_image': order_settings.disabled_image,
+                'orders_disabled_title': orders_disabled_title,
+                'orders_disabled_message': orders_disabled_message,
+                'footer_copyright': footer_copyright,
             })
     except Exception:
         # If OrderSettings table doesn't exist yet (before migration), 
@@ -131,7 +235,29 @@ def order_form(request):
             settings.EMAIL_HOST_USER, #email for site
             ['bigearincornpatch@gmail.com'],  # email of recever
         fail_silently=False)
-    return render(request, 'projects/order_form.html', )
+    
+    # Get page content for order form page
+    order_paypal_instructions = PageContent.get_content('order_paypal_instructions', 
+        'To secure your order, send a PayPal payment of $1000 deposit to howard@mvforge.com and please include complete contact information, including a mailing address, shipping address (if different), email contact, and a telephone number. Or we can make arrangements to accept a credit card in other ways. Contact us at howard@mvforge.com for more options.')
+    
+    order_rules_section = PageContent.get_content('order_rules_section', 
+        'Please provide all your contact information. We communicate primarily through email. If you would like to provide a phone number please include it.\n\nLength of blade: This is the nagasa the cutting part of the sword.\n\nSori: Curve of the sword. Specified at the deepest point.\n\nAn $1000 USD deposit per blade is required at the time your order is placed. PayPal, Credit & Debit Cards, Checks, Money Orders, and Wire Transfers are accepted.\n\nThe deposit will apply to the total purchase price of your sword and is nonrefundable. The balance on the blade plus shipping is due when the sword is near completion.\n\nOnce your order is accepted by Howard it may not be changed. For an order to have a place in the queue it must be accompianied by an $1000 USD deposit. You will receive a confirmation email from us.\n\nPricing in USD:\n• Katana base price $5000\n• Wakizashi base price $3750\n• Tanto base price $2500\n• additional costs may be incurred depending on the details of your order.')
+    
+    footer_copyright = PageContent.get_content('footer_copyright', 
+        'Morgan Valley forge since 1988.')
+    
+    coming_soon_title = PageContent.get_content('coming_soon_title', 'Coming Soon')
+    coming_soon_message = PageContent.get_content('coming_soon_message', 
+        'Our website is currently under construction. Please check back later!')
+    
+    context = {
+        'order_paypal_instructions': order_paypal_instructions,
+        'order_rules_section': order_rules_section,
+        'footer_copyright': footer_copyright,
+        'coming_soon_title': coming_soon_title,
+        'coming_soon_message': coming_soon_message,
+    }
+    return render(request, 'projects/order_form.html', context)
 
 
 def details_h(request, hotel_id):
@@ -171,9 +297,26 @@ def sales(request):
             ['bigearincornpatch@gmail.com'],  # email of recever
             fail_silently=False)
 
+    # Get page content for sales page
+    paypal_info = PageContent.get_content('sales_paypal_info', 
+        'To secure your order, send a PayPal payment to howard@mvforge.com and please include complete contact information, such as a mailing address, shipping address (if different), email contact, and a telephone number. Or we can make arrangements to accept a credit card in other ways. Contact us at howard@mvforge.com for more options.')
+    
+    footer_copyright = PageContent.get_content('footer_copyright', 
+        'Morgan Valley forge since 1988.')
+    
+    coming_soon_title = PageContent.get_content('coming_soon_title', 'Coming Soon')
+    coming_soon_message = PageContent.get_content('coming_soon_message', 
+        'Our website is currently under construction. Please check back later!')
 
     sword_sales = Sword_sales.objects
-    return render(request, 'projects/sales.html', {'sword_sales': sword_sales})
+    context = {
+        'sword_sales': sword_sales,
+        'paypal_info': paypal_info,
+        'footer_copyright': footer_copyright,
+        'coming_soon_title': coming_soon_title,
+        'coming_soon_message': coming_soon_message,
+    }
+    return render(request, 'projects/sales.html', context)
 
 
 def details_sales(request, sword_sales_id):

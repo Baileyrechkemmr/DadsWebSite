@@ -142,3 +142,86 @@ class OrderSettings(models.Model):
         """Get or create the singleton settings instance"""
         settings, created = cls.objects.get_or_create(pk=1)
         return settings
+
+
+class PageContent(models.Model):
+    """
+    Model for managing editable text content across different pages.
+    Allows admins to edit text content without touching HTML templates.
+    """
+    PAGE_CHOICES = [
+        # Sales Page
+        ('sales_paypal_info', 'Sales Page - PayPal Information'),
+        ('sales_form_title', 'Sales Page - Form Title'),
+        
+        # Footer & Coming Soon (appears on all pages)
+        ('footer_copyright', 'Footer - Copyright Text'),
+        ('coming_soon_title', 'Coming Soon - Title'),
+        ('coming_soon_message', 'Coming Soon - Message'),
+        
+        # Home Page Content
+        ('home_classes_description', 'Home Page - Classes Description'),
+        ('home_l6_video_description', 'Home Page - L6 Video Description'),
+        ('home_blog_description', 'Home Page - Blog Description'),
+        
+        # About Page
+        ('about_biography', 'About Page - Howard Clark Biography'),
+        
+        # Order Form Page
+        ('order_paypal_instructions', 'Order Form - PayPal Instructions'),
+        ('order_rules_section', 'Order Form - Rules & Pricing'),
+        
+        # Classes Page
+        ('classes_general_info', 'Classes Page - General Information'),
+        ('classes_payment_instructions', 'Classes Page - Payment Instructions'),
+        ('classes_address_info', 'Classes Page - Address Information'),
+        ('classes_materials_info', 'Classes Page - Materials Information'),
+        ('classes_equipment_requirements', 'Classes Page - Equipment Requirements'),
+        ('classes_safety_equipment', 'Classes Page - Safety Equipment'),
+        ('classes_practice_recommendations', 'Classes Page - Practice Recommendations'),
+        ('classes_one_on_one_info', 'Classes Page - One-on-One Lessons'),
+        
+        # Orders Disabled Page
+        ('orders_disabled_title', 'Orders Disabled - Title'),
+        ('orders_disabled_message', 'Orders Disabled - Message'),
+    ]
+    
+    page_section = models.CharField(
+        max_length=50, 
+        choices=PAGE_CHOICES, 
+        unique=True,
+        help_text="Select which section of the website this content belongs to"
+    )
+    title = models.CharField(
+        max_length=200, 
+        blank=True,
+        help_text="Optional title for this content section"
+    )
+    content = models.TextField(
+        help_text="The actual content that will be displayed on the website"
+    )
+    is_active = models.BooleanField(
+        default=True,
+        help_text="Uncheck to hide this content from the website"
+    )
+    last_updated = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        verbose_name = 'Page Content'
+        verbose_name_plural = 'Page Content'
+        ordering = ['page_section']
+    
+    def __str__(self):
+        return f"{self.get_page_section_display()} - {self.title or 'No title'}"
+    
+    @classmethod
+    def get_content(cls, page_section, default_content=""):
+        """
+        Get content for a specific page section.
+        Returns the content if found and active, otherwise returns default_content.
+        """
+        try:
+            content_obj = cls.objects.get(page_section=page_section, is_active=True)
+            return content_obj.content
+        except cls.DoesNotExist:
+            return default_content

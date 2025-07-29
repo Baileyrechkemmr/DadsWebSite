@@ -182,7 +182,7 @@
     <main>
         <div class="disabled-orders-container">
             <div class="disabled-message-box">
-                <h1>Custom Sword Orders Currently Unavailable</h1>
+                <h1>{{ orders_disabled_title }}</h1>
                 
                 {% if disabled_image %}
                     <img src="{{ disabled_image.url }}" alt="Orders Disabled" class="disabled-image">
@@ -190,7 +190,7 @@
                 
                 <p>{{ disabled_message|default:"No longer accepting orders at this time" }}</p>
                 
-                <p>We apologize for any inconvenience. Please check back later or browse our available swords in the Sales section.</p>
+                <p>{{ orders_disabled_message }}</p>
                 
                 <a href="{% url 'home' %}" class="back-button">Return to Home</a>
                 <a href="{% url 'sales' %}" class="back-button">Browse Available Swords</a>
@@ -200,7 +200,7 @@
         <!-- FOOTER -->
         <footer id="container_footer">
             <p class="float-end"><a href="#">Back to top</a></p>
-            <p>&copy; Morgan Valley forge since 1988.</p>
+            <p>&copy; {{ footer_copyright }}</p>
         </footer>
     </main>
 

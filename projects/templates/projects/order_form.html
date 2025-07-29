@@ -423,35 +423,12 @@
                     <button class="order_form_button" type="submit">submit</button>
                 </form> <br/>
                 <p>all measurements are in inches</p>
-                <p>To secure your order, send a PayPal payment of $1000 deposit to howard@mvforge.com and please include complete contact
-                information, including a mailing address, shipping address (if different), email contact, and a telephone number. Or we
-                can make arrangements to accept a credit card in other ways. Contact us at howard@mvforge.com for more options.</p>
+                <p>{{ order_paypal_instructions }}</p>
             </div>
             <div class="order-form-rules">
                 <h2>Placing Your Sword Order</h2>
                 
-                <p>Please provide all your contact information. We communicate primarily through email. If you would like to provide a
-                phone number please include it.</p> <br/>
-                
-                <p>Length of blade: This is the nagasa the cutting part of the sword.</p> <br/>
-
-                <p>Sori: Curve of the sword. Specified at the deepest point.</p> <br/>
-
-                <p>An $1000 USD deposit per blade is required at the time your order is placed. PayPal, Credit & Debit Cards, Checks, Money
-                Orders, and Wire Transfers are accepted.</p> <br/>
-
-                <p>The deposit will apply to the total purchase price of your sword and is nonrefundable. The balance on the blade plus
-                shipping is due when the sword is near completion.</p> <br/>
-
-                <p>Once your order is accepted by Howard it may not be changed. For an order to have a place in the queue it must be
-                accompianied by an $1000 USD deposit. You will receive a confirmation email from us.</p> <br/>
-
-                <ul>Pricing in USD:
-                    <li>Katana base price $5000</li>
-                    <li>Wakizashi base price $3750</li>
-                    <li>Tanto base price $2500</li>
-                    <li>additional costs may be incurred depending on the details of your order.</li>
-                </ul>
+                {{ order_rules_section|linebreaks }}
             </div>
 
             
@@ -465,7 +442,7 @@
         <!-- FOOTER -->
         <footer id="container_footer">
             <p class="float-end"><a href="#">Back to top</a></p>
-            <p>&copy; Morgan Valley forge since 1988.</p>
+            <p>&copy; {{ footer_copyright }}</p>
         </footer>
     </main>
 
@@ -473,8 +450,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 
     <div class="coming-soon">
-        <h1>Coming Soon</h1>
-        <p>Our website is currently under construction. Please check back later!</p>
+        <h1>{{ coming_soon_title }}</h1>
+        <p>{{ coming_soon_message }}</p>
     </div>
 </body>
 

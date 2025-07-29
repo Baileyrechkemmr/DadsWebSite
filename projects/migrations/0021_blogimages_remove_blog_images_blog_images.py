@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
             name='BlogImages',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('image', models.CharField(default='null')),
+                ('image', models.CharField(default='null', max_length=255)),
             ],
         ),
         migrations.RemoveField(

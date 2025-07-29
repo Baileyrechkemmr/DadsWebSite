@@ -405,11 +405,7 @@
                     {% endfor %}
                 </div>
                 <div class="pay_pal_info">
-                    <p>To secure your order, send a PayPal payment to howard@mvforge.com and please include complete
-                        contact
-                        information, such as a mailing address, shipping address (if different), email contact, and a telephone number. Or
-                        we
-                        can make arrangements to accept a credit card in other ways. Contact us at howard@mvforge.com for more options.</p>
+                    <p>{{ paypal_info }}</p>
                 </div>
             </div>
             <!-- /END THE FEATURETTES -->
@@ -458,7 +454,7 @@
         <!-- FOOTER -->
         <footer class="container_footer">
             <p class="float-end"><a href="#">Back to top</a></p>
-            <p>&copy; Morgan Valley forge since 1988.</p>
+            <p>&copy; {{ footer_copyright }}</p>
         </footer>
         </main>
     </main>
@@ -467,8 +463,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 
     <div class="coming-soon">
-        <h1>Coming Soon</h1>
-        <p>Our website is currently under construction. Please check back later!</p>
+        <h1>{{ coming_soon_title }}</h1>
+        <p>{{ coming_soon_message }}</p>
     </div>
 </body>
 

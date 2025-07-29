@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Year, Classes, Sword_img, Hotel, Blog, Sword_sales, BlogImages, Gallery, OrderSettings
+from .models import Year, Classes, Sword_img, Hotel, Blog, Sword_sales, BlogImages, Gallery, OrderSettings, PageContent
 from django.utils.html import format_html
 from django.shortcuts import redirect
 from django.contrib import messages
@@ -231,3 +231,42 @@ class OrderSettingsAdmin(admin.ModelAdmin):
     def has_delete_permission(self, request, obj=None):
         # Prevent deletion of the settings
         return False
+
+
+@admin.register(PageContent)
+class PageContentAdmin(admin.ModelAdmin):
+    def content_preview(self, obj):
+        """Show a preview of the content"""
+        if obj.content:
+            return obj.content[:100] + "..." if len(obj.content) > 100 else obj.content
+        return "No content"
+    content_preview.short_description = 'Content Preview'
+    
+    def formatted_date(self, obj):
+        """Show a nicely formatted date"""
+        return obj.last_updated.strftime('%B %d, %Y at %I:%M %p')
+    formatted_date.short_description = 'Last Updated'
+    formatted_date.admin_order_field = 'last_updated'
+    
+    list_display = ['page_section', 'title', 'content_preview', 'is_active', 'formatted_date']
+    list_filter = ['page_section', 'is_active', 'last_updated']
+    search_fields = ['title', 'content', 'page_section']
+    list_editable = ['is_active']
+    readonly_fields = ['last_updated']
+    
+    fieldsets = (
+        ('Content Information', {
+            'fields': ('page_section', 'title', 'content')
+        }),
+        ('Display Settings', {
+            'fields': ('is_active',)
+        }),
+        ('Metadata', {
+            'fields': ('last_updated',),
+            'classes': ('collapse',)
+        }),
+    )
+    
+    def get_queryset(self, request):
+        """Order by page_section for better organization"""
+        return super().get_queryset(request).order_by('page_section')
