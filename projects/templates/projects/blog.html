@@ -1,8 +1,6 @@
 <!doctype html>
-<html lang="en" data-bs-theme="auto">
-
-<!-- loads in the static collected from command python3 manage.py collectstatic-->
 {% load static %}
+<html lang="en" data-bs-theme="auto">
 
 <head>
     <script src="/docs/5.3/assets/js/color-modes.js"></script>
@@ -362,7 +360,7 @@
                         <img src="{% static 'profile_pic_1.png' %}" rect width="100%" height="250" />
                     </div>
                     <div class="bio_info">
-                        <p> a Look into the Life of Howard Clark and his Animal companions</p>
+                        <p> {{ blog_page_greeting }}</p>
                     </div>
                 </div>
                 <!-- Wrap the rest of the page in another container to center all the content. -->

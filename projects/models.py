@@ -151,25 +151,14 @@ class PageContent(models.Model):
     """
     PAGE_CHOICES = [
         # Sales Page
-        ('sales_paypal_info', 'Sales Page - PayPal Information'),
-        ('sales_form_title', 'Sales Page - Form Title'),
-        
-        # Footer & Coming Soon (appears on all pages)
-        ('footer_copyright', 'Footer - Copyright Text'),
-        ('coming_soon_title', 'Coming Soon - Title'),
-        ('coming_soon_message', 'Coming Soon - Message'),
-        
-        # Home Page Content
-        ('home_classes_description', 'Home Page - Classes Description'),
-        ('home_l6_video_description', 'Home Page - L6 Video Description'),
-        ('home_blog_description', 'Home Page - Blog Description'),
+        ('sales_page_payment_info', 'Sales Page - Payment Information'),
         
         # About Page
         ('about_biography', 'About Page - Howard Clark Biography'),
         
         # Order Form Page
-        ('order_paypal_instructions', 'Order Form - PayPal Instructions'),
-        ('order_rules_section', 'Order Form - Rules & Pricing'),
+        ('sword_order_payment_instructions', 'Order Form - Payment Instructions'),
+        ('sword_order_info_section', 'Order Form - Rules & Pricing'),
         
         # Classes Page
         ('classes_general_info', 'Classes Page - General Information'),
@@ -184,6 +173,9 @@ class PageContent(models.Model):
         # Orders Disabled Page
         ('orders_disabled_title', 'Orders Disabled - Title'),
         ('orders_disabled_message', 'Orders Disabled - Message'),
+
+        # blog page greeting
+        #('blog_page_greeting', 'blog page greeting')
     ]
     
     page_section = models.CharField(

@@ -423,12 +423,12 @@
                     <button class="order_form_button" type="submit">submit</button>
                 </form> <br/>
                 <p>all measurements are in inches</p>
-                <p>{{ order_paypal_instructions }}</p>
+                <p>{{ sword_order_payment_instructions }}</p>
             </div>
             <div class="order-form-rules">
                 <h2>Placing Your Sword Order</h2>
                 
-                {{ order_rules_section|linebreaks }}
+                {{ sword_order_info_section|linebreaks }}
             </div>
 
             
@@ -442,7 +442,7 @@
         <!-- FOOTER -->
         <footer id="container_footer">
             <p class="float-end"><a href="#">Back to top</a></p>
-            <p>&copy; {{ footer_copyright }}</p>
+            <p>&copy; Morgan Valley forge since 1988.</p>
         </footer>
     </main>
 
