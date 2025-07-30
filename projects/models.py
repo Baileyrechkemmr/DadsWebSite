@@ -174,8 +174,8 @@ class PageContent(models.Model):
         ('orders_disabled_title', 'Orders Disabled - Title'),
         ('orders_disabled_message', 'Orders Disabled - Message'),
 
-        # blog page greeting
-        #('blog_page_greeting', 'blog page greeting')
+        # Blog Page
+        ('blog_page_greeting', 'Blog Page - Greeting Text'),
     ]
     
     page_section = models.CharField(

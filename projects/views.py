@@ -130,16 +130,16 @@ def movie(request):
 def blog(request):
     blogs = Blog.objects.all()
     
-    # blog page content
-    blog_page_greeting = PageContent.get_content('blog bio info', 
-        'a Look into the Life of Howard Clark and his Animal companions')
+    # Get blog page content
+    blog_page_greeting = PageContent.get_content('blog_page_greeting', 
+        'A Look into the Life of Howard Clark and his Animal companions')
     
-    #context = {
-    #    'blog_page_greeting': mark_safe(blog_page_greeting),
-    #   }
-    
+    context = {
+        'blogs': blogs,
+        'blog_page_greeting': blog_page_greeting,
+    }
 
-    return render(request, 'projects/blog.html', {'blogs': blogs})
+    return render(request, 'projects/blog.html', context)
 
 
 
