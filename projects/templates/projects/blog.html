@@ -221,6 +221,30 @@
         .coming-soon{
             display: none;
         }
+        .bio_info {
+    background: rgba(107, 109, 109, 0.85);
+    color: #fff;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    margin-top: 1rem;
+    max-width: 520px; /* larger box */
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pic img {
+    width: 100%; /* fits inside the box */
+    height: 325px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+}
     </style>
 
 
@@ -363,11 +387,11 @@
     ================================================== -->
             <div class="item_contarner">
                 <div class="blog_pic">
-                    <div class="pic">
-                        <img src="{% static 'profile_pic_1.png' %}" rect width="100%" height="250" />
-                    </div>
                     <div class="bio_info">
-                        <p> {{ blog_page_greeting }}</p>
+                        <div class="pic">
+                            <img src="{% static 'profile_pic_1.png' %}" rect width="100%" height="250" />
+                        </div>
+                        <p>{{ blog_page_greeting }}</p>
                     </div>
                 </div>
                 <!-- Wrap the rest of the page in another container to center all the content. -->
