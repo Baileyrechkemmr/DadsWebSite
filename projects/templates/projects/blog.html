@@ -164,6 +164,12 @@
         .blog_images img {
             max-width: 100%;
             margin: 10px 0;
+            width: 100%;      /* responsive width */
+            height: auto;     /* keeps aspect ratio */
+            max-height: 200px; /* optional limit */
+            object-fit: contain; /* keeps the image undistorted */
+            display: block;
+            margin-top: 20%;
         }
 
         body {

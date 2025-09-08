@@ -123,7 +123,12 @@
             
         }
         .card-img-top{
-            height: 300px;
+            width: 100%;      /* responsive width */
+            height: auto;     /* keeps aspect ratio */
+            max-height: 200px; /* optional limit */
+            object-fit: contain; /* keeps the image undistorted */
+            display: block;
+            margin-top: 20%;
             
         }
         .card {

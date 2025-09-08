@@ -130,6 +130,7 @@
             -ms-overflow-style: none; /* Internet Explorer and Edge */
             /* border: #712cf9 solid 4px; */
         }
+        
         .card_container::-webkit-scrollbar {
             width: 6px; /* Set the width of the scrollbar */
         }
@@ -143,8 +144,12 @@
         }
 
         .card-img-top {
-            height: 300px;
-
+            width: 100%;      /* responsive width */
+            height: auto;     /* keeps aspect ratio */
+            max-height: 200px; /* optional limit */
+            object-fit: contain; /* keeps the image undistorted */
+            display: block;
+            margin-top: 20%;
         }
 
         .sales_form{
@@ -170,7 +175,7 @@
 
         /* button */button {
             width: 250px;
-            padding: 10px;
+            padding: 10px 15px;
             border: none;
             outline: none;
             cursor: pointer;
@@ -179,7 +184,7 @@
             border-radius: 12px;
             background-color: black;
             color: white;
-            position: sticky;
+            margin-top: auto;
         }
         
         
@@ -394,13 +399,13 @@
                     {% for sword_sales in sword_sales.all %}
                     <div class="card" style="width: 18rem;">
                         <img src="{{ sword_sales.image.url }}" class="card-img-top" alt="{{ sword_sales.image }}">
-                        <div class="card-body">
+                        <!-- <div class="card-body"> -->
                             <h5 class="card-title">{{ sword_sales.item_number }}</h5>
                             <P class="card-price">${{ sword_sales.price }}</P>
                             <button class="button">
                                 <a class="button_color" href="{% url 'details_sales' sword_sales.id %}" class="btn btn-primary">Learn more</a>
                             </button>
-                        </div>
+                        <!-- </div> -->
                     </div>
                     {% endfor %}
                 </div>

@@ -28,13 +28,18 @@
             -moz-user-select: none;
             user-select: none;
         }
+        .mb-3 {
+            width: 300px;
+            height: 200px;
+            object-fit: contain;  /* or cover, depending on your needs */
+        }
 
         @media (max-width: 767px) {
             /* CSS for screens with a width less than 768px goes here */
             .container_marketing {
                 display: none; /* Hide the marketing content */
             }
-             
+            
 
             /* Show the "Coming Soon" content */
             .coming-soon {
@@ -58,6 +63,7 @@
                 color: #666;
             }
         }
+        
         /* button */
         .button {
             width: 150px;
@@ -145,6 +151,7 @@
         .coming-soon{
             display: none;
         }
+        
     </style>
 
 
@@ -160,8 +167,7 @@
             <div id="details" class="row py-lg-5">
                 <div class="col-lg-6 col-md-8 mx-auto">
                     <!-- profile image static name is the same as pic in static folder created from command python3 manage.py collectstatic -->
-                    <img class="mb-3" src='{{ sword.image.url }}' alt="{{sword.image}}"
-                        style="width: 420px; height: 490px; object-fit: cover;">
+                    <img class="mb-3" src='{{ sword.image.url }}' alt="{{sword.image}}">
                     <h1 class="fw-light">{{ sword.item_number|default:sword.title }}</h1>
                     <p id="text" class="lead ">{{ sword.description}}</p> <!-- come back later and put in -->
                     <p>
