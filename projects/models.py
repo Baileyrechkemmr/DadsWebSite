@@ -157,18 +157,10 @@ class PageContent(models.Model):
         ('about_biography', 'About Page - Howard Clark Biography'),
         
         # Order Form Page
-        ('sword_order_payment_instructions', 'Order Form - Payment Instructions'),
-        ('sword_order_info_section', 'Order Form - Rules & Pricing'),
+        ('sword_order_word_block', 'Order Form - word block'),
         
         # Classes Page
-        ('classes_general_info', 'Classes Page - General Information'),
-        ('classes_payment_instructions', 'Classes Page - Payment Instructions'),
-        ('classes_address_info', 'Classes Page - Address Information'),
-        ('classes_materials_info', 'Classes Page - Materials Information'),
-        ('classes_equipment_requirements', 'Classes Page - Equipment Requirements'),
-        ('classes_safety_equipment', 'Classes Page - Safety Equipment'),
-        ('classes_practice_recommendations', 'Classes Page - Practice Recommendations'),
-        ('classes_one_on_one_info', 'Classes Page - One-on-One Lessons'),
+        ('classes_word_block', 'Classes Page - Word Block'),
         
         # Orders Disabled Page
         ('orders_disabled_title', 'Orders Disabled - Title'),

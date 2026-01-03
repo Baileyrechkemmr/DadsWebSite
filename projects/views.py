@@ -73,29 +73,8 @@ def classes(request):
     hotel = Hotel.objects
     
     # Get page content for classes page
-    classes_general_info = PageContent.get_content('classes_general_info', 
+    classes_word_block = PageContent.get_content('classes_word_block', 
         'Each of these classes will include one day of forging blade(s), grinding, heat treating, and assembling a basic forged carbon steel knife. All classes are limited to four participants\n\n$775 for the week. $700 tuition, plus $75 materials fee')
-    
-    classes_payment_instructions = PageContent.get_content('classes_payment_instructions', 
-        'To secure your spot in any of these classes, Email to howard@mvforge.com, and send a $200 deposit to howard@mvforge.com via PayPal, making sure to mention which class.\n\nBalance due two weeks prior to class start date')
-    
-    classes_address_info = PageContent.get_content('classes_address_info', 
-        'Or mail a check to Howard Clark\n115 35th Place\nRunnells, IA 50237')
-    
-    classes_materials_info = PageContent.get_content('classes_materials_info', 
-        'All required materials will be provided. Blade steel, basic shop supplies, and basic handle materials. Premium materials may be available for additional cost.')
-    
-    classes_equipment_requirements = PageContent.get_content('classes_equipment_requirements', 
-        'You will need long pants, leather shoes, safety glasses, and a dust particle mask of your liking, at least a p95 rating. Bringing snacks or lunch is required, as the shop is in a rural location and lunch is not readily available without driving a few miles')
-    
-    classes_safety_equipment = PageContent.get_content('classes_safety_equipment', 
-        'For forging classes, you may also want an apron as well as gloves to protect your from heat and sparks. Hot mill gloves made from cotton, or cotton chore gloves are advised. Leather can and will shrink fit onto your hand at times, and can exacerbate the burn potential in this way.')
-    
-    classes_practice_recommendations = PageContent.get_content('classes_practice_recommendations', 
-        'If you have no prior forging experience, then some hammer practice time may be in order. One of my dear late friends, Larry Harley, always suggested that folks get a carpenters hammer and a pile of nails, and some scrap lumber, and simply drive nails. It builds accuracy, which is essential to forging success.')
-    
-    classes_one_on_one_info = PageContent.get_content('classes_one_on_one_info', 
-        'It is also possible that we may be able to accommodate one on one lessons at the rate of $500/day, scheduling to be decided. Please inquire via e-mail, howard@mvforge.com')
     
     footer_copyright = PageContent.get_content('footer_copyright', 
         'Morgan Valley forge since 1988.')
@@ -108,14 +87,7 @@ def classes(request):
         'classes': classes, 
         'hotel': hotel, 
         'year': year,
-        'classes_general_info': classes_general_info,
-        'classes_payment_instructions': classes_payment_instructions,
-        'classes_address_info': classes_address_info,
-        'classes_materials_info': classes_materials_info,
-        'classes_equipment_requirements': classes_equipment_requirements,
-        'classes_safety_equipment': classes_safety_equipment,
-        'classes_practice_recommendations': classes_practice_recommendations,
-        'classes_one_on_one_info': classes_one_on_one_info,
+        'classes_word_block': classes_word_block,
         'footer_copyright': footer_copyright,
         'coming_soon_title': coming_soon_title,
         'coming_soon_message': coming_soon_message,
@@ -222,16 +194,13 @@ def order_form(request):
         fail_silently=False)
     
     # Get page content for order form page
-    sword_order_payment_instructions = PageContent.get_content('')
-    
-    sword_order_info_section = PageContent.get_content('sword_order_info_section', 
+    sword_order_word_block = PageContent.get_content('sword_order_word_block', 
         '')
     
 
     
     context = {
-        'sword_order_payment_instructions': sword_order_payment_instructions,
-        'sword_order_info_section': sword_order_info_section,
+        'sword_order_word_block': sword_order_word_block,
     }
     return render(request, 'projects/order_form.html', context)
 
